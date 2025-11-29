@@ -73,6 +73,7 @@ watch(
   <div class="flex w-full flex-col items-center gap-4 py-4 sm:py-6 md:flex-row">
     <div class="relative flex flex-1 items-center justify-center">
       <div
+        v-show="!isRunning"
         class="absolute left-0 top-1/2 flex -translate-y-1/2 flex-col gap-2 opacity-80"
       >
         <button
@@ -109,6 +110,7 @@ watch(
         />
       </h1>
       <div
+        v-show="!isRunning"
         class="absolute right-16 top-1/2 flex -translate-y-1/2 flex-col gap-2 opacity-80 sm:right-20 md:right-24"
       >
         <button
