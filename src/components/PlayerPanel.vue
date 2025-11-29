@@ -167,18 +167,6 @@ const negativeButtons = [-4, -3, -2];
         </span>
         <div class="absolute inset-y-0 left-3 flex flex-col justify-around">
           <button
-            v-for="value in negativeButtons"
-            :key="`remove-${value}`"
-            type="button"
-            class="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg text-xs sm:text-sm font-bold"
-            :class="minusButtonClass"
-            @click="subtractPoints(Math.abs(value))"
-          >
-            {{ value }}
-          </button>
-        </div>
-        <div class="absolute inset-y-0 right-3 flex flex-col justify-around">
-          <button
             v-for="value in positiveButtons"
             :key="`add-${value}`"
             type="button"
@@ -187,6 +175,18 @@ const negativeButtons = [-4, -3, -2];
             @click="addPoints(value)"
           >
             +{{ value }}
+          </button>
+        </div>
+        <div class="absolute inset-y-0 right-3 flex flex-col justify-around">
+          <button
+            v-for="value in negativeButtons"
+            :key="`remove-${value}`"
+            type="button"
+            class="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-lg text-xs sm:text-sm font-bold"
+            :class="minusButtonClass"
+            @click="subtractPoints(Math.abs(value))"
+          >
+            {{ value }}
           </button>
         </div>
       </div>
