@@ -40,7 +40,7 @@ const updateTatami = (value) => emit("update:tatami", value);
       <img
         src="/MG-Team-Logo.png"
         alt="Logo"
-        class="h-12 w-12 object-contain"
+        class="h-16 w-16 object-contain sm:h-20 sm:w-20"
       />
       <EditableText
         :model-value="organizer"
