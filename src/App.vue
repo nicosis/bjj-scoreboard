@@ -13,16 +13,16 @@ const isDark = ref(true);
 const players = reactive([
   {
     id: "left",
-    name: "Competidor 1",
-    team: "Nombre de la academia / Equipo",
+    name: "Competidor A",
+    team: "MG TEAM BARCELONA",
     points: 0,
     advantages: 0,
     penalties: 0,
   },
   {
     id: "right",
-    name: "Competidor 2",
-    team: "Nombre de la academia / Equipo",
+    name: "Competidor B",
+    team: "MG TEAM BARCELONA",
     points: 0,
     advantages: 0,
     penalties: 0,

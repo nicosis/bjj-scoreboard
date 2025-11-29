@@ -132,7 +132,7 @@ const negativeButtons = [-4, -3, -2];
       >
         <EditableText
           :model-value="player.name"
-          placeholder="COMPETITOR NAME"
+          placeholder="Nombre del Competidor"
           :display-class="`${nameDisplayClass} focus:outline-none`"
           input-class="text-center text-4xl font-bold uppercase tracking-tight"
           @update:model-value="updateName"
@@ -143,7 +143,7 @@ const negativeButtons = [-4, -3, -2];
       >
         <EditableText
           :model-value="player.team"
-          placeholder="NOMBRE DE LA ACADEMIA"
+          placeholder="Nombre de la academia / Equipo"
           :display-class="`${teamDisplayClass} focus:outline-none`"
           input-class="text-center text-[0.7rem] uppercase tracking-wide"
           @update:model-value="updateTeam"
