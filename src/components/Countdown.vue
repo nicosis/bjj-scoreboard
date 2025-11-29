@@ -39,7 +39,7 @@ const formattedTime = computed(() => {
       >
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
           :disabled="isRunning"
           @click="$emit('add-minute')"
         >
@@ -47,7 +47,7 @@ const formattedTime = computed(() => {
         </button>
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
           :disabled="isRunning"
           @click="$emit('subtract-minute')"
         >
@@ -55,7 +55,7 @@ const formattedTime = computed(() => {
         </button>
       </div>
       <h1
-        class="text-white text-[12vw] font-black leading-none tracking-tighter sm:text-[10vw] md:text-9xl"
+        class="text-white text-[23vw] font-black leading-none sm:text-[19vw] md:text-[14.5vw]"
         style="font-feature-settings: 'tnum' on, 'lnum' on"
       >
         {{ formattedTime }}
@@ -65,7 +65,7 @@ const formattedTime = computed(() => {
       >
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
           :disabled="isRunning"
           @click="$emit('add-second')"
         >
@@ -73,7 +73,7 @@ const formattedTime = computed(() => {
         </button>
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
           :disabled="isRunning"
           @click="$emit('subtract-second')"
         >

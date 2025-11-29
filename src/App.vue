@@ -5,24 +5,24 @@ import Countdown from "./components/Countdown.vue";
 import ScoreBoard from "./components/ScoreBoard.vue";
 import { useCountdown } from "./composables/useCountdown";
 
-const organizer = ref("BJJ Championship");
-const category = ref("Category: Adult / Black Belt");
+const organizer = ref("MG Interclub");
+const category = ref("Categoría: Adulto / Cinturón Negro / -76kg");
 const tatami = ref("Tatami: 01");
 const isDark = ref(true);
 
 const players = reactive([
   {
     id: "left",
-    name: "Competitor Name",
-    team: "Team / Academy Name",
+    name: "Competidor 1",
+    team: "Nombre de la academia / Equipo",
     points: 0,
     advantages: 0,
     penalties: 0,
   },
   {
     id: "right",
-    name: "Competitor Name",
-    team: "Team / Academy Name",
+    name: "Competidor 2",
+    team: "Nombre de la academia / Equipo",
     points: 0,
     advantages: 0,
     penalties: 0,
@@ -30,7 +30,7 @@ const players = reactive([
 ]);
 
 const { time, isRunning, start, pause, reset, addTime, subtractTime } =
-  useCountdown(6 * 60);
+  useCountdown(5 * 60);
 
 const rootClasses = computed(() => [
   "relative flex h-auto min-h-screen w-full flex-col overflow-hidden font-display",
@@ -82,6 +82,19 @@ const resetAll = () => {
 };
 
 const handleKeyPress = (event) => {
+  // Verificar si el usuario está editando un campo (input o textarea con foco)
+  const activeElement = document.activeElement;
+  const isEditingField =
+    activeElement &&
+    (activeElement.tagName === "INPUT" ||
+      activeElement.tagName === "TEXTAREA" ||
+      activeElement.isContentEditable);
+
+  // Si está editando, no ejecutar las acciones de teclado globales
+  if (isEditingField) {
+    return;
+  }
+
   // Barra espaciadora: Play/Pause
   if (
     event.code === "Space" ||
@@ -133,7 +146,7 @@ onUnmounted(() => {
             :is-running="isRunning"
             @play="start"
             @pause="pause"
-            @reset="reset"
+            @reset="resetAll"
             @add-minute="() => addTime(60)"
             @subtract-minute="() => subtractTime(60)"
             @add-second="() => addTime(10)"

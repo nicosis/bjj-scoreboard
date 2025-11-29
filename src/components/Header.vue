@@ -37,14 +37,11 @@ const updateTatami = (value) => emit("update:tatami", value);
     class="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-4 py-3 text-gray-900 sm:px-6 dark:border-white/10 dark:text-white"
   >
     <div class="flex items-center gap-4">
-      <div class="h-6 w-6 text-primary">
-        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
+      <img
+        src="/MG-Team-Logo.png"
+        alt="Logo"
+        class="h-12 w-12 object-contain"
+      />
       <EditableText
         :model-value="organizer"
         placeholder="Nombre del evento"
