@@ -19,6 +19,7 @@ const emit = defineEmits(["update-name", "update-team", "score-change"]);
 const points = ref(props.player.points ?? 0);
 const advantages = ref(props.player.advantages ?? 0);
 const penalties = ref(props.player.penalties ?? 0);
+const penaltyDirection = ref("up");
 
 watch(
   () => props.player.points,
@@ -103,11 +104,13 @@ const subtractAdvantage = () => {
 };
 
 const addPenalty = () => {
+  penaltyDirection.value = "up";
   penalties.value = Math.max(-99, penalties.value - 1);
   emitScore();
 };
 
 const subtractPenalty = () => {
+  penaltyDirection.value = "down";
   penalties.value = Math.min(0, penalties.value + 1);
   emitScore();
 };
@@ -119,6 +122,14 @@ const updateName = (value) => {
 const updateTeam = (value) => {
   emit("update-team", { id: props.player.id, value });
 };
+
+const canSubtractPoints = computed(() => points.value > 0);
+const canSubtractAdvantage = computed(() => advantages.value > 0);
+const canIncreasePenalty = computed(() => penalties.value < 0);
+const penaltiesDisplay = computed(() => {
+  const abs = Math.abs(penalties.value);
+  return abs > 0 ? `-${abs}` : abs;
+});
 
 const positiveButtons = [4, 3, 2];
 const negativeButtons = [-4, -3, -2];
@@ -177,7 +188,10 @@ const negativeButtons = [-4, -3, -2];
             +{{ value }}
           </button>
         </div>
-        <div class="absolute inset-y-0 right-3 flex flex-col justify-around">
+        <div
+          class="absolute inset-y-0 right-3 flex flex-col justify-around"
+          v-show="canSubtractPoints"
+        >
           <button
             v-for="value in negativeButtons"
             :key="`remove-${value}`"
@@ -214,6 +228,7 @@ const negativeButtons = [-4, -3, -2];
               type="button"
               class="flex h-7 w-7 items-center justify-center rounded-md bg-black/20 text-white"
               @click="subtractAdvantage"
+              v-show="canSubtractAdvantage"
             >
               -
             </button>
@@ -241,21 +256,25 @@ const negativeButtons = [-4, -3, -2];
               class="flex h-7 w-7 items-center justify-center rounded-md bg-white/20 text-white"
               @click="addPenalty"
             >
-              -
+              +
             </button>
             <button
               type="button"
               class="flex h-7 w-7 items-center justify-center rounded-md bg-black/20 text-white"
               @click="subtractPenalty"
+              v-show="canIncreasePenalty"
             >
-              +
+              -
             </button>
           </div>
           <span
             class="font-bold text-5xl sm:text-6xl"
             style="font-feature-settings: 'tnum' on, 'lnum' on"
           >
-            <SlidingNumber :value="penalties" />
+            <SlidingNumber
+              :value="penaltiesDisplay"
+              :direction="penaltyDirection"
+            />
           </span>
         </div>
       </div>
