@@ -1,5 +1,5 @@
 <script setup>
-import { nextTick, ref, watch } from "vue";
+import { computed, nextTick, ref, watch } from "vue";
 
 const props = defineProps({
   modelValue: {
@@ -39,6 +39,14 @@ watch(
   }
 );
 
+const isPlaceholderActive = computed(
+  () => (props.modelValue ?? "").trim().length === 0
+);
+
+const displayText = computed(() =>
+  isPlaceholderActive.value ? props.placeholder : props.modelValue
+);
+
 const startEditing = () => {
   isEditing.value = true;
   nextTick(() => {
@@ -72,10 +80,13 @@ const handleKeydown = (event) => {
     v-if="!isEditing"
     type="button"
     class="cursor-text"
-    :class="displayClass"
+    :class="[
+      displayClass,
+      isPlaceholderActive ? '!text-gray-400 dark:!text-gray-500' : '',
+    ]"
     @click="startEditing"
   >
-    {{ modelValue || placeholder }}
+    {{ displayText }}
   </component>
   <input
     v-else
