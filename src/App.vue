@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from "vue";
 import HeaderBar from "./components/Header.vue";
 import Countdown from "./components/Countdown.vue";
 import ScoreBoard from "./components/ScoreBoard.vue";
@@ -31,6 +31,7 @@ const players = reactive([
 
 const { time, isRunning, start, pause, reset, addTime, subtractTime } =
   useCountdown(5 * 60);
+const audioContext = ref(null);
 
 const rootClasses = computed(() => [
   "relative flex h-auto min-h-screen w-full flex-col overflow-hidden font-display",
@@ -81,6 +82,52 @@ const resetAll = () => {
   });
 };
 
+const ensureAudioContext = () => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  const AudioContextClass =
+    window.AudioContext || window.webkitAudioContext || null;
+  if (!AudioContextClass) {
+    return null;
+  }
+  if (!audioContext.value) {
+    audioContext.value = new AudioContextClass();
+  }
+  return audioContext.value;
+};
+
+const playEndSound = () => {
+  const ctx = ensureAudioContext();
+  if (!ctx) {
+    return;
+  }
+
+  if (ctx.state === "suspended") {
+    ctx.resume();
+  }
+
+  const duration = 1.2;
+  const oscillator = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+
+  oscillator.type = "triangle";
+  oscillator.frequency.setValueAtTime(880, ctx.currentTime);
+
+  gainNode.gain.setValueAtTime(0.001, ctx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.5, ctx.currentTime + 0.01);
+  gainNode.gain.exponentialRampToValueAtTime(
+    0.00001,
+    ctx.currentTime + duration
+  );
+
+  oscillator.connect(gainNode);
+  gainNode.connect(ctx.destination);
+
+  oscillator.start();
+  oscillator.stop(ctx.currentTime + duration);
+};
+
 const handleKeyPress = (event) => {
   // Verificar si el usuario está editando un campo (input o textarea con foco)
   const activeElement = document.activeElement;
@@ -122,7 +169,21 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener("keydown", handleKeyPress);
+  if (audioContext.value) {
+    audioContext.value.close();
+    audioContext.value = null;
+  }
 });
+
+watch(
+  time,
+  (newVal, oldVal) => {
+    if (oldVal > 0 && newVal === 0) {
+      playEndSound();
+    }
+  },
+  { flush: "post" }
+);
 </script>
 
 <template>
