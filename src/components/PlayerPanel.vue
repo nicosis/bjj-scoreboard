@@ -176,7 +176,7 @@ const negativeButtons = [-4, -3, -2];
             class="block text-[11vw] sm:text-5xl md:text-[7vw] lg:text-[12rem]"
           />
         </span>
-        <div class="absolute inset-y-0 left-3 flex flex-col justify-around">
+        <div class="absolute inset-x-3 top-3 flex justify-end gap-3">
           <button
             v-for="value in positiveButtons"
             :key="`add-${value}`"
@@ -189,7 +189,7 @@ const negativeButtons = [-4, -3, -2];
           </button>
         </div>
         <div
-          class="absolute inset-y-0 right-3 flex flex-col justify-around"
+          class="absolute inset-x-3 bottom-3 flex justify-end gap-3"
           v-show="canSubtractPoints"
         >
           <button
