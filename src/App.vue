@@ -5,9 +5,9 @@ import Countdown from "./components/Countdown.vue";
 import ScoreBoard from "./components/ScoreBoard.vue";
 import { useCountdown } from "./composables/useCountdown";
 
-const organizer = ref("MG Interclub");
-const category = ref("Categoría: Adulto / Cinturón Negro / -76kg");
-const tatami = ref("Tatami: 01");
+const organizer = ref("INTERCLUB MG TEAM BARCELONA");
+const category = ref("Categoría: Edad / Faixa / Peso");
+const tatami = ref("Tatami X");
 const isDark = ref(true);
 
 const players = reactive([
@@ -149,8 +149,8 @@ onUnmounted(() => {
             @reset="resetAll"
             @add-minute="() => addTime(60)"
             @subtract-minute="() => subtractTime(60)"
-            @add-second="() => addTime(10)"
-            @subtract-second="() => subtractTime(10)"
+            @add-second="() => addTime(1)"
+            @subtract-second="() => subtractTime(1)"
           />
 
           <ScoreBoard

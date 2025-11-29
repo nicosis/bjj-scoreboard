@@ -1,5 +1,6 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
+import SlidingNumber from "./SlidingNumber.vue";
 
 const props = defineProps({
   time: {
@@ -22,13 +23,50 @@ const emit = defineEmits([
   "subtract-second",
 ]);
 
-const formattedTime = computed(() => {
-  const minutes = Math.floor(props.time / 60)
-    .toString()
-    .padStart(2, "0");
-  const seconds = (props.time % 60).toString().padStart(2, "0");
-  return `${minutes}:${seconds}`;
-});
+const minutesValue = computed(() => Math.floor(props.time / 60));
+const secondsValue = computed(() => props.time % 60);
+const minutesDisplay = computed(() =>
+  minutesValue.value.toString().padStart(2, "0")
+);
+const secondsDisplay = computed(() =>
+  secondsValue.value.toString().padStart(2, "0")
+);
+
+const minuteDirection = ref("down");
+const secondDirection = ref("down");
+
+watch(
+  minutesValue,
+  (newVal, oldVal) => {
+    if (typeof oldVal !== "number") {
+      return;
+    }
+    minuteDirection.value = newVal >= oldVal ? "up" : "down";
+  },
+  { flush: "sync" }
+);
+
+watch(
+  secondsValue,
+  (newVal, oldVal) => {
+    if (typeof oldVal !== "number") {
+      return;
+    }
+
+    if (oldVal === 0 && newVal === 59) {
+      secondDirection.value = "down";
+      return;
+    }
+
+    if (oldVal === 59 && newVal === 0) {
+      secondDirection.value = "up";
+      return;
+    }
+
+    secondDirection.value = newVal >= oldVal ? "up" : "down";
+  },
+  { flush: "sync" }
+);
 </script>
 
 <template>
@@ -43,7 +81,7 @@ const formattedTime = computed(() => {
           :disabled="isRunning"
           @click="$emit('add-minute')"
         >
-          +1m
+          +
         </button>
         <button
           type="button"
@@ -51,14 +89,24 @@ const formattedTime = computed(() => {
           :disabled="isRunning"
           @click="$emit('subtract-minute')"
         >
-          -1m
+          -
         </button>
       </div>
       <h1
-        class="text-white text-[23vw] font-black leading-none sm:text-[19vw] md:text-[14.5vw]"
+        class="flex items-baseline gap-6 text-white text-[20vw] font-black leading-none tracking-[0.05em] sm:text-[16vw] md:text-[13vw]"
         style="font-feature-settings: 'tnum' on, 'lnum' on"
       >
-        {{ formattedTime }}
+        <SlidingNumber
+          :value="minutesValue"
+          :display="minutesDisplay"
+          :direction="minuteDirection"
+        />
+        <span class="text-[0.8em]">:</span>
+        <SlidingNumber
+          :value="secondsValue"
+          :display="secondsDisplay"
+          :direction="secondDirection"
+        />
       </h1>
       <div
         class="absolute right-16 top-1/2 flex -translate-y-1/2 flex-col gap-2 opacity-80 sm:right-20 md:right-24"
@@ -69,7 +117,7 @@ const formattedTime = computed(() => {
           :disabled="isRunning"
           @click="$emit('add-second')"
         >
-          +10s
+          +
         </button>
         <button
           type="button"
@@ -77,7 +125,7 @@ const formattedTime = computed(() => {
           :disabled="isRunning"
           @click="$emit('subtract-second')"
         >
-          -10s
+          -
         </button>
       </div>
       <div

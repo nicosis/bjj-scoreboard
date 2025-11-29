@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import EditableText from "./EditableText.vue";
+import SlidingNumber from "./SlidingNumber.vue";
 
 const props = defineProps({
   player: {
@@ -159,9 +160,10 @@ const negativeButtons = [-4, -3, -2];
           class="font-black leading-none"
           style="font-feature-settings: 'tnum' on, 'lnum' on"
         >
-          <span class="text-[11vw] sm:text-5xl md:text-[7vw] lg:text-[12rem]">
-            {{ points }}
-          </span>
+          <SlidingNumber
+            :value="points"
+            class="block text-[11vw] sm:text-5xl md:text-[7vw] lg:text-[12rem]"
+          />
         </span>
         <div class="absolute inset-y-0 left-3 flex flex-col justify-around">
           <button
@@ -191,7 +193,7 @@ const negativeButtons = [-4, -3, -2];
 
       <div class="grid grid-cols-2 gap-3 sm:gap-4">
         <div
-          class="bg-amber-500 text-white rounded-lg p-3 flex items-center justify-center relative"
+          class="bg-yellow-400 text-white rounded-lg p-3 flex items-center justify-center relative"
         >
           <span
             class="absolute left-3 top-2 text-xs font-semibold uppercase tracking-[0.35em]"
@@ -220,7 +222,7 @@ const negativeButtons = [-4, -3, -2];
             class="font-bold text-5xl sm:text-6xl"
             style="font-feature-settings: 'tnum' on, 'lnum' on"
           >
-            {{ advantages }}
+            <SlidingNumber :value="advantages" />
           </span>
         </div>
         <div
@@ -253,7 +255,7 @@ const negativeButtons = [-4, -3, -2];
             class="font-bold text-5xl sm:text-6xl"
             style="font-feature-settings: 'tnum' on, 'lnum' on"
           >
-            {{ penalties }}
+            <SlidingNumber :value="penalties" />
           </span>
         </div>
       </div>
