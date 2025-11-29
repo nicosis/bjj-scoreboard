@@ -55,13 +55,13 @@ const formattedTime = computed(() => {
         </button>
       </div>
       <h1
-        class="text-lime-500 text-[12vw] font-black leading-none tracking-tighter sm:text-[10vw] md:text-9xl"
+        class="text-white text-[12vw] font-black leading-none tracking-tighter sm:text-[10vw] md:text-9xl"
         style="font-feature-settings: 'tnum' on, 'lnum' on"
       >
         {{ formattedTime }}
       </h1>
       <div
-        class="absolute right-0 top-1/2 flex -translate-y-1/2 flex-col gap-2 opacity-80"
+        class="absolute right-16 top-1/2 flex -translate-y-1/2 flex-col gap-2 opacity-80 sm:right-20 md:right-24"
       >
         <button
           type="button"
@@ -80,31 +80,33 @@ const formattedTime = computed(() => {
           -10s
         </button>
       </div>
-    </div>
-    <div class="flex gap-3 pt-2 md:flex-col md:pt-0">
-      <button
-        type="button"
-        class="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-500 text-sm font-bold uppercase text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
-        :disabled="isRunning"
-        @click="$emit('play')"
+      <div
+        class="absolute right-0 top-1/2 flex -translate-y-1/2 flex-col gap-2"
       >
-        Play
-      </button>
-      <button
-        type="button"
-        class="flex h-12 w-12 items-center justify-center rounded-lg bg-amber-500 text-sm font-bold uppercase text-white transition hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-50"
-        :disabled="!isRunning"
-        @click="$emit('pause')"
-      >
-        Pause
-      </button>
-      <button
-        type="button"
-        class="flex h-12 w-12 items-center justify-center rounded-lg bg-red-600 text-sm font-bold uppercase text-white transition hover:bg-red-500"
-        @click="$emit('reset')"
-      >
-        Reset
-      </button>
+        <button
+          type="button"
+          class="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20 text-green-400 transition hover:bg-green-500/30 hover:text-green-300 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-green-500/30 dark:text-green-300"
+          :disabled="isRunning"
+          @click="$emit('play')"
+        >
+          <span class="material-symbols-outlined !text-3xl">play_arrow</span>
+        </button>
+        <button
+          type="button"
+          class="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-500 transition hover:bg-yellow-500/30 hover:text-yellow-400 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-yellow-500/30 dark:text-yellow-400"
+          :disabled="!isRunning"
+          @click="$emit('pause')"
+        >
+          <span class="material-symbols-outlined !text-3xl">pause</span>
+        </button>
+        <button
+          type="button"
+          class="flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20 text-red-500 transition hover:bg-red-500/30 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-red-500/30 dark:text-red-400"
+          @click="$emit('reset')"
+        >
+          <span class="material-symbols-outlined !text-3xl">replay</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import HeaderBar from "./components/Header.vue";
 import Countdown from "./components/Countdown.vue";
 import ScoreBoard from "./components/ScoreBoard.vue";
@@ -29,15 +29,8 @@ const players = reactive([
   },
 ]);
 
-const {
-  time,
-  isRunning,
-  start,
-  pause,
-  reset,
-  addTime,
-  subtractTime,
-} = useCountdown(6 * 60);
+const { time, isRunning, start, pause, reset, addTime, subtractTime } =
+  useCountdown(6 * 60);
 
 const rootClasses = computed(() => [
   "relative flex h-auto min-h-screen w-full flex-col overflow-hidden font-display",
@@ -75,6 +68,48 @@ const setTatami = (value) => {
 const toggleTheme = () => {
   isDark.value = !isDark.value;
 };
+
+const resetAll = () => {
+  // Resetea el temporizador
+  reset();
+
+  // Resetea los marcadores de ambos jugadores
+  players.forEach((player) => {
+    player.points = 0;
+    player.advantages = 0;
+    player.penalties = 0;
+  });
+};
+
+const handleKeyPress = (event) => {
+  // Barra espaciadora: Play/Pause
+  if (
+    event.code === "Space" ||
+    event.code === "Pause" ||
+    event.key === "Pause"
+  ) {
+    event.preventDefault();
+    if (isRunning.value) {
+      pause();
+    } else {
+      start();
+    }
+  }
+
+  // Tecla Escape: Reset completo
+  if (event.code === "Escape" || event.key === "Escape") {
+    event.preventDefault();
+    resetAll();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", handleKeyPress);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyPress);
+});
 </script>
 
 <template>
