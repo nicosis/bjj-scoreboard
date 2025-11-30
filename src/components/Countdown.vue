@@ -11,6 +11,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  compact: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([
@@ -34,6 +38,30 @@ const secondsDisplay = computed(() =>
 
 const minuteDirection = ref("down");
 const secondDirection = ref("down");
+
+const containerSpacingClass = computed(() =>
+  props.compact ? "gap-3 py-2 sm:py-3" : "gap-4 py-4 sm:py-6"
+);
+const timerScaleClass = computed(() =>
+  props.compact
+    ? "gap-4 text-[clamp(3.5rem,10vw,6.5rem)] sm:text-[clamp(3.5rem,8vw,6rem)]"
+    : "gap-6 text-[20vw] sm:text-[16vw] md:text-[13vw]"
+);
+const adjustButtonSizeClass = computed(() =>
+  props.compact ? "h-8 w-8 text-[0.65rem]" : "h-10 w-10 text-xs"
+);
+const adjustStackGapClass = computed(() =>
+  props.compact ? "gap-1.5" : "gap-2"
+);
+const secondaryAdjustOffsetClass = computed(() =>
+  props.compact ? "right-12 sm:right-16 md:right-20" : "right-16 sm:right-20 md:right-24"
+);
+const controlButtonSizeClass = computed(() =>
+  props.compact ? "h-10 w-10" : "h-12 w-12"
+);
+const controlGapClass = computed(() =>
+  props.compact ? "gap-1.5" : "gap-2"
+);
 
 watch(
   minutesValue,
@@ -70,15 +98,26 @@ watch(
 </script>
 
 <template>
-  <div class="flex w-full flex-col items-center gap-4 py-4 sm:py-6 md:flex-row">
+  <div
+    :class="[
+      'flex w-full flex-col items-center md:flex-row',
+      containerSpacingClass,
+    ]"
+  >
     <div class="relative flex flex-1 items-center justify-center">
       <div
         v-show="!isRunning"
-        class="absolute left-0 top-1/2 flex -translate-y-1/2 flex-col gap-2 opacity-80"
+        :class="[
+          'absolute left-0 top-1/2 flex -translate-y-1/2 flex-col opacity-80',
+          adjustStackGapClass,
+        ]"
       >
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          :class="[
+            'flex items-center justify-center rounded-md bg-gray-500/10 font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+            adjustButtonSizeClass,
+          ]"
           :disabled="isRunning"
           @click="$emit('add-minute')"
         >
@@ -86,7 +125,10 @@ watch(
         </button>
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          :class="[
+            'flex items-center justify-center rounded-md bg-gray-500/10 font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+            adjustButtonSizeClass,
+          ]"
           :disabled="isRunning"
           @click="$emit('subtract-minute')"
         >
@@ -94,7 +136,10 @@ watch(
         </button>
       </div>
       <h1
-        class="flex items-baseline gap-6 text-white text-[20vw] font-black leading-none tracking-[0.05em] sm:text-[16vw] md:text-[13vw]"
+        :class="[
+          'flex items-baseline text-white font-black leading-none tracking-[0.05em]',
+          timerScaleClass,
+        ]"
         style="font-feature-settings: 'tnum' on, 'lnum' on"
       >
         <SlidingNumber
@@ -111,11 +156,18 @@ watch(
       </h1>
       <div
         v-show="!isRunning"
-        class="absolute right-16 top-1/2 flex -translate-y-1/2 flex-col gap-2 opacity-80 sm:right-20 md:right-24"
+        :class="[
+          'absolute top-1/2 flex -translate-y-1/2 flex-col opacity-80',
+          secondaryAdjustOffsetClass,
+          adjustStackGapClass,
+        ]"
       >
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          :class="[
+            'flex items-center justify-center rounded-md bg-gray-500/10 font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+            adjustButtonSizeClass,
+          ]"
           :disabled="isRunning"
           @click="$emit('add-second')"
         >
@@ -123,7 +175,10 @@ watch(
         </button>
         <button
           type="button"
-          class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-500/10 text-xs font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+          :class="[
+            'flex items-center justify-center rounded-md bg-gray-500/10 font-bold uppercase tracking-wide text-gray-600 transition hover:bg-gray-500/20 disabled:opacity-40 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
+            adjustButtonSizeClass,
+          ]"
           :disabled="isRunning"
           @click="$emit('subtract-second')"
         >
@@ -131,11 +186,17 @@ watch(
         </button>
       </div>
       <div
-        class="absolute right-0 top-1/2 flex -translate-y-1/2 flex-col gap-2"
+        :class="[
+          'absolute right-0 top-1/2 flex -translate-y-1/2 flex-col',
+          controlGapClass,
+        ]"
       >
         <button
           type="button"
-          class="flex h-12 w-12 items-center justify-center rounded-lg bg-green-500/20 text-green-400 transition hover:bg-green-500/30 hover:text-green-300 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-green-500/30 dark:text-green-300"
+          :class="[
+            'flex items-center justify-center rounded-lg bg-green-500/20 text-green-400 transition hover:bg-green-500/30 hover:text-green-300 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-green-500/30 dark:text-green-300',
+            controlButtonSizeClass,
+          ]"
           :disabled="isRunning"
           @click="$emit('play')"
         >
@@ -143,7 +204,10 @@ watch(
         </button>
         <button
           type="button"
-          class="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-500 transition hover:bg-yellow-500/30 hover:text-yellow-400 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-yellow-500/30 dark:text-yellow-400"
+          :class="[
+            'flex items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-500 transition hover:bg-yellow-500/30 hover:text-yellow-400 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-yellow-500/30 dark:text-yellow-400',
+            controlButtonSizeClass,
+          ]"
           :disabled="!isRunning"
           @click="$emit('pause')"
         >
@@ -151,7 +215,10 @@ watch(
         </button>
         <button
           type="button"
-          class="flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/20 text-red-500 transition hover:bg-red-500/30 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-red-500/30 dark:text-red-400"
+          :class="[
+            'flex items-center justify-center rounded-lg bg-red-500/20 text-red-500 transition hover:bg-red-500/30 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-30 dark:bg-red-500/30 dark:text-red-400',
+            controlButtonSizeClass,
+          ]"
           @click="$emit('reset')"
         >
           <span class="material-symbols-outlined !text-3xl">replay</span>

@@ -9,6 +9,7 @@ const organizer = ref("INTERCLUB MG TEAM BARCELONA");
 const category = ref("Categoría: Edad / Faixa / Peso");
 const tatami = ref("Tatami X");
 const isDark = ref(true);
+const isCompactHeight = ref(false);
 
 const players = reactive([
   {
@@ -37,6 +38,14 @@ const rootClasses = computed(() => [
   "relative flex h-auto min-h-screen w-full flex-col overflow-hidden font-display",
   "bg-background-light text-gray-900 dark:bg-background-dark dark:text-white",
 ]);
+
+const layoutPaddingClass = computed(() =>
+  isCompactHeight.value ? "p-3 sm:p-4 md:p-4" : "p-4 sm:p-6 md:p-5"
+);
+
+const columnGapClass = computed(() =>
+  isCompactHeight.value ? "gap-3 sm:gap-4" : "gap-4 sm:gap-6"
+);
 
 const handlePlayerUpdate = ({ id, field, value }) => {
   const player = players.find((entry) => entry.id === id);
@@ -128,6 +137,13 @@ const playEndSound = () => {
   oscillator.stop(ctx.currentTime + duration);
 };
 
+const updateViewportFlags = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+  isCompactHeight.value = window.innerHeight <= 820;
+};
+
 const handleKeyPress = (event) => {
   // Verificar si el usuario está editando un campo (input o textarea con foco)
   const activeElement = document.activeElement;
@@ -164,11 +180,14 @@ const handleKeyPress = (event) => {
 };
 
 onMounted(() => {
+  updateViewportFlags();
   window.addEventListener("keydown", handleKeyPress);
+  window.addEventListener("resize", updateViewportFlags);
 });
 
 onUnmounted(() => {
   window.removeEventListener("keydown", handleKeyPress);
+  window.removeEventListener("resize", updateViewportFlags);
   if (audioContext.value) {
     audioContext.value.close();
     audioContext.value = null;
@@ -189,13 +208,19 @@ watch(
 <template>
   <div :class="[{ dark: isDark }, ...rootClasses]">
     <div class="layout-container flex h-full grow flex-col">
-      <div class="flex flex-1 justify-center p-4 sm:p-6 md:p-8">
-        <div class="layout-content-container flex max-w-7xl flex-1 flex-col">
+      <div :class="['flex flex-1 justify-center', layoutPaddingClass]">
+        <div
+          :class="[
+            'layout-content-container flex max-w-7xl flex-1 flex-col',
+            columnGapClass,
+          ]"
+        >
           <HeaderBar
             :organizer="organizer"
             :category="category"
             :tatami="tatami"
             :is-dark="isDark"
+            :compact="isCompactHeight"
             @update:organizer="setOrganizer"
             @update:category="setCategory"
             @update:tatami="setTatami"
@@ -205,6 +230,7 @@ watch(
           <Countdown
             :time="time"
             :is-running="isRunning"
+            :compact="isCompactHeight"
             @play="start"
             @pause="pause"
             @reset="resetAll"
@@ -216,6 +242,7 @@ watch(
 
           <ScoreBoard
             :players="players"
+            :compact="isCompactHeight"
             @update-player="handlePlayerUpdate"
             @score-change="handleScoreChange"
           />
