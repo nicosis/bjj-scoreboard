@@ -110,7 +110,7 @@ const pointsCardPaddingClass = computed(() =>
 
 const pointsValueClass = computed(() =>
   props.compact
-    ? "text-[clamp(3.5rem,6vw,7rem)]"
+    ? "text-[clamp(3.5rem,12vw,7rem)]"
     : "text-[11vw] sm:text-5xl md:text-[7vw] lg:text-[12rem]"
 );
 
