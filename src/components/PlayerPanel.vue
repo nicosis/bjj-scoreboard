@@ -92,16 +92,12 @@ const panelGapClass = computed(() =>
   props.compact ? "gap-3" : "gap-4 sm:gap-6"
 );
 
-const nameCardPaddingClass = computed(() =>
-  props.compact ? "p-2" : "p-3"
-);
+const nameCardPaddingClass = computed(() => (props.compact ? "p-2" : "p-3"));
 
-const teamCardPaddingClass = computed(() =>
-  props.compact ? "p-2" : "p-[0.4rem]"
-);
-
-const infoSpacingClass = computed(() =>
-  props.compact ? "mt-2" : "mt-3"
+const dividerClass = computed(() =>
+  isLeft.value
+    ? "border-white/30 dark:border-white/30"
+    : "border-black/10 dark:border-white/20"
 );
 
 const scoreStackGapClass = computed(() =>
@@ -120,12 +116,12 @@ const pointsValueClass = computed(() =>
 
 const pointsButtonSizeClass = computed(() =>
   props.compact
-    ? "h-7 w-7 text-[0.7rem]"
-    : "h-7 w-7 sm:h-9 sm:w-9 text-xs sm:text-sm"
+    ? "h-10 w-10 text-sm"
+    : "h-10 w-10 sm:h-14 sm:w-14 text-sm sm:text-base"
 );
 
 const pointsControlsGapClass = computed(() =>
-  props.compact ? "gap-2" : "gap-3"
+  props.compact ? "gap-1" : "gap-2"
 );
 
 const horizontalControlClass = computed(() => {
@@ -150,9 +146,7 @@ const statsGridGapClass = computed(() =>
   props.compact ? "gap-2" : "gap-3 sm:gap-4"
 );
 
-const statBoxPaddingClass = computed(() =>
-  props.compact ? "p-2" : "p-3"
-);
+const statBoxPaddingClass = computed(() => (props.compact ? "p-2" : "p-3"));
 
 const statLabelOffsetClass = computed(() =>
   props.compact ? "left-2 top-2" : "left-3 top-2"
@@ -256,14 +250,7 @@ const negativeButtons = [-4, -3, -2];
           input-class="text-center text-4xl font-bold uppercase tracking-tight"
           @update:model-value="updateName"
         />
-      </div>
-      <div
-        :class="[
-          'overflow-hidden rounded-lg border border-white/20 bg-white/5 dark:border-white/10',
-          infoSpacingClass,
-          teamCardPaddingClass,
-        ]"
-      >
+        <div :class="['my-2 border-t', dividerClass]" />
         <EditableText
           :model-value="player.team"
           placeholder="Nombre de la academia / Equipo"
@@ -286,10 +273,7 @@ const negativeButtons = [-4, -3, -2];
           class="font-black leading-none"
           style="font-feature-settings: 'tnum' on, 'lnum' on"
         >
-          <SlidingNumber
-            :value="points"
-            :class="['block', pointsValueClass]"
-          />
+          <SlidingNumber :value="points" :class="['block', pointsValueClass]" />
         </span>
         <div
           :class="[
