@@ -128,12 +128,22 @@ const pointsControlsGapClass = computed(() =>
   props.compact ? "gap-2" : "gap-3"
 );
 
-const topControlsPositionClass = computed(() =>
-  props.compact ? "inset-x-2 top-2" : "inset-x-3 top-3"
+const horizontalControlClass = computed(() => {
+  const offset = props.compact ? "2" : "3";
+  return isLeft.value ? `right-${offset}` : `left-${offset}`;
+});
+
+const topControlsPositionClass = computed(
+  () => `${horizontalControlClass.value} ${props.compact ? "top-2" : "top-3"}`
 );
 
-const bottomControlsPositionClass = computed(() =>
-  props.compact ? "inset-x-2 bottom-2" : "inset-x-3 bottom-3"
+const bottomControlsPositionClass = computed(
+  () =>
+    `${horizontalControlClass.value} ${props.compact ? "bottom-2" : "bottom-3"}`
+);
+
+const pointsControlsJustifyClass = computed(() =>
+  isLeft.value ? "justify-end" : "justify-start"
 );
 
 const statsGridGapClass = computed(() =>
@@ -152,9 +162,10 @@ const statLabelTextClass = computed(() =>
   props.compact ? "text-[0.6rem]" : "text-xs"
 );
 
-const statButtonOffsetClass = computed(() =>
-  props.compact ? "right-2" : "right-3"
-);
+const statButtonOffsetClass = computed(() => {
+  const offset = props.compact ? "2" : "3";
+  return isLeft.value ? `right-${offset}` : `left-${offset}`;
+});
 
 const statButtonGapClass = computed(() =>
   props.compact ? "gap-1.5" : "gap-2"
@@ -282,7 +293,8 @@ const negativeButtons = [-4, -3, -2];
         </span>
         <div
           :class="[
-            'absolute flex justify-end',
+            'absolute flex',
+            pointsControlsJustifyClass,
             topControlsPositionClass,
             pointsControlsGapClass,
           ]"
@@ -303,7 +315,8 @@ const negativeButtons = [-4, -3, -2];
         </div>
         <div
           :class="[
-            'absolute flex justify-end',
+            'absolute flex',
+            pointsControlsJustifyClass,
             bottomControlsPositionClass,
             pointsControlsGapClass,
           ]"
