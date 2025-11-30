@@ -125,8 +125,10 @@ const pointsControlsGapClass = computed(() =>
 );
 
 const horizontalControlClass = computed(() => {
-  const offset = props.compact ? "2" : "3";
-  return isLeft.value ? `right-${offset}` : `left-${offset}`;
+  if (props.compact) {
+    return isLeft.value ? "right-2" : "left-2";
+  }
+  return isLeft.value ? "right-3" : "left-3";
 });
 
 const topControlsPositionClass = computed(
@@ -148,17 +150,30 @@ const statsGridGapClass = computed(() =>
 
 const statBoxPaddingClass = computed(() => (props.compact ? "p-2" : "p-3"));
 
-const statLabelOffsetClass = computed(() =>
-  props.compact ? "left-2 top-2" : "left-3 top-2"
-);
+const statLabelOffsetClass = computed(() => {
+  const side = props.compact
+    ? isLeft.value
+      ? "left-2"
+      : "right-2"
+    : isLeft.value
+    ? "left-3"
+    : "right-3";
+  return `${side} top-2`;
+});
 
 const statLabelTextClass = computed(() =>
   props.compact ? "text-[0.6rem]" : "text-xs"
 );
 
+const statLabelAlignClass = computed(() =>
+  isLeft.value ? "text-left" : "text-right"
+);
+
 const statButtonOffsetClass = computed(() => {
-  const offset = props.compact ? "2" : "3";
-  return isLeft.value ? `right-${offset}` : `left-${offset}`;
+  if (props.compact) {
+    return isLeft.value ? "right-2" : "left-2";
+  }
+  return isLeft.value ? "right-3" : "left-3";
 });
 
 const statButtonGapClass = computed(() =>
@@ -334,6 +349,7 @@ const negativeButtons = [-4, -3, -2];
               'absolute font-semibold uppercase tracking-[0.35em]',
               statLabelOffsetClass,
               statLabelTextClass,
+              statLabelAlignClass,
             ]"
           >
             Ventajas
@@ -385,6 +401,7 @@ const negativeButtons = [-4, -3, -2];
               'absolute font-semibold uppercase tracking-[0.35em]',
               statLabelOffsetClass,
               statLabelTextClass,
+              statLabelAlignClass,
             ]"
           >
             PENALIDADES
