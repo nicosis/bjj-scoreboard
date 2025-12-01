@@ -42,9 +42,10 @@ const secondDirection = ref("down");
 const containerSpacingClass = computed(() =>
   props.compact ? "gap-3 py-2 sm:py-3" : "gap-4 py-4 sm:py-6"
 );
+console.log("compact:", props.compact);
 const timerScaleClass = computed(() =>
   props.compact
-    ? "gap-4 text-[clamp(3.5rem,10vw,6.5rem)] sm:text-[clamp(3.5rem,8vw,6rem)]"
+    ? "gap-4 text-[clamp(6rem,16vw,11rem)] sm:text-[clamp(5.5rem,13.5vw,9.8rem)]"
     : "gap-6 text-[20vw] sm:text-[16vw] md:text-[13vw]"
 );
 const adjustButtonSizeClass = computed(() =>
@@ -54,13 +55,16 @@ const adjustStackGapClass = computed(() =>
   props.compact ? "gap-1.5" : "gap-2"
 );
 const secondaryAdjustOffsetClass = computed(() =>
-  props.compact ? "right-12 sm:right-16 md:right-20" : "right-16 sm:right-20 md:right-24"
+  props.compact
+    ? "md:right-12 lg:right-16 xl:right-20"
+    : "md:right-16 lg:right-20 xl:right-24"
 );
 const controlButtonSizeClass = computed(() =>
   props.compact ? "h-10 w-10" : "h-12 w-12"
 );
-const controlGapClass = computed(() =>
-  props.compact ? "gap-1.5" : "gap-2"
+const controlGapClass = computed(() => (props.compact ? "gap-1.5" : "gap-2"));
+const timerAreaOffsetClass = computed(() =>
+  props.compact ? "pr-16 sm:pr-20" : "pr-20 sm:pr-28"
 );
 
 watch(
@@ -104,12 +108,18 @@ watch(
       containerSpacingClass,
     ]"
   >
-    <div class="relative flex flex-1 items-center justify-center">
+    <div
+      :class="[
+        'relative flex flex-1 items-center justify-center',
+        timerAreaOffsetClass,
+      ]"
+    >
       <div
         v-show="!isRunning"
         :class="[
-          'absolute left-0 top-1/2 flex -translate-y-1/2 flex-col opacity-80',
+          'flex flex-col opacity-80 self-center md:self-start md:absolute md:left-0 md:top-1/2 md:-translate-y-1/2',
           adjustStackGapClass,
+          props.compact ? 'px-3 py-1 mt-2 mb-2' : '',
         ]"
       >
         <button
@@ -157,9 +167,10 @@ watch(
       <div
         v-show="!isRunning"
         :class="[
-          'absolute top-1/2 flex -translate-y-1/2 flex-col opacity-80',
+          'flex flex-col opacity-80 self-center md:self-auto md:absolute md:top-1/2 md:-translate-y-1/2',
           secondaryAdjustOffsetClass,
           adjustStackGapClass,
+          props.compact ? 'px-3 py-1 mt-2 mb-2' : '',
         ]"
       >
         <button

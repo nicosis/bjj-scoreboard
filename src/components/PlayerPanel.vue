@@ -104,13 +104,17 @@ const scoreStackGapClass = computed(() =>
   props.compact ? "gap-2" : "gap-2 sm:gap-3"
 );
 
+const pointsCardFlexClass = computed(() =>
+  props.compact ? "flex-[0.6]" : "flex-[0.9]"
+);
+
 const pointsCardPaddingClass = computed(() =>
   props.compact ? "p-1" : "p-1 sm:p-1.5"
 );
 
 const pointsValueClass = computed(() =>
   props.compact
-    ? "text-[clamp(3.5rem,12vw,7rem)]"
+    ? "text-[clamp(3.5rem,12vw,10rem)]"
     : "text-[11vw] sm:text-5xl md:text-[7vw] lg:text-[12rem]"
 );
 
@@ -148,7 +152,11 @@ const statsGridGapClass = computed(() =>
   props.compact ? "gap-2" : "gap-3 sm:gap-4"
 );
 
-const statBoxPaddingClass = computed(() => (props.compact ? "p-2" : "p-3"));
+const statsGridFlexClass = computed(() =>
+  props.compact ? "flex-[0.3]" : ""
+);
+
+const statBoxPaddingClass = computed(() => (props.compact ? "p-2.5" : "p-3"));
 
 const statLabelOffsetClass = computed(() => {
   const side = props.compact
@@ -185,7 +193,9 @@ const statButtonSizeClass = computed(() =>
 );
 
 const statNumberClass = computed(() =>
-  props.compact ? "text-4xl sm:text-5xl" : "text-5xl sm:text-6xl"
+  props.compact
+    ? "text-[clamp(2.4rem,8vw,4.2rem)] sm:text-[clamp(2.9rem,6vw,4.8rem)]"
+    : "text-5xl sm:text-6xl"
 );
 
 const emitScore = () => {
@@ -279,7 +289,8 @@ const negativeButtons = [-4, -3, -2];
     <div :class="['flex flex-col flex-1', scoreStackGapClass]">
       <div
         :class="[
-          'rounded-xl flex items-center justify-center relative flex-[0.9]',
+          'rounded-xl flex items-center justify-center relative',
+          pointsCardFlexClass,
           pointsCardClass,
           pointsCardPaddingClass,
         ]"
@@ -337,7 +348,7 @@ const negativeButtons = [-4, -3, -2];
         </div>
       </div>
 
-      <div :class="['grid grid-cols-2', statsGridGapClass]">
+      <div :class="['grid grid-cols-2', statsGridGapClass, statsGridFlexClass]">
         <div
           :class="[
             'bg-yellow-400 text-white rounded-lg flex items-center justify-center relative',
