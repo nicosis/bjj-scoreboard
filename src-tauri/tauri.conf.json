@@ -12,7 +12,15 @@
   "app": {
     "windows": [
       {
-        "title": "bjj-scoreboard",
+        "title": "BJJ Scoreboard",
+        "visible": true,
+        "center": true,
+        "minWidth": 800,
+        "minHeight": 600,
+        "maximized": false,
+        "decorations": true,
+        "alwaysOnTop": false,
+        "skipTaskbar": false,
         "width": 800,
         "height": 600,
         "resizable": true,
