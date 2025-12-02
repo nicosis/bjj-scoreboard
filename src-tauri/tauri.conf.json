@@ -32,6 +32,11 @@
       "icons/icon_128x128.png",
       "icons/icon_256x256.png",
       "icons/icon_512x512.png"
-    ]
+    ],
+    "windows": {
+      "certificateThumbprint": "A43047B4735809F2D65DDFFACF2CEDE60823DF4A",
+      "digestAlgorithm": "sha256",
+      "timestampUrl": "http://timestamp.digicert.com"
+    }
   }
 }
