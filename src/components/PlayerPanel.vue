@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref, watch } from "vue";
+import EditableAutocomplete from "./EditableAutocomplete.vue";
 import EditableText from "./EditableText.vue";
 import SlidingNumber from "./SlidingNumber.vue";
 
@@ -15,6 +16,14 @@ const props = defineProps({
   compact: {
     type: Boolean,
     default: false,
+  },
+  competitors: {
+    type: Array,
+    default: () => [],
+  },
+  usedNames: {
+    type: Array,
+    default: () => [],
   },
 });
 
@@ -239,12 +248,55 @@ const subtractPenalty = () => {
   emitScore();
 };
 
+const normalizedUsedNames = computed(() =>
+  new Set(
+    (props.usedNames ?? [])
+      .map((entry) => (entry ?? "").toString().trim().toLowerCase())
+      .filter(Boolean)
+  )
+);
+
+const availableCompetitors = computed(() => {
+  const currentName = (props.player.name ?? "").toString().trim().toLowerCase();
+  const usedSet = normalizedUsedNames.value;
+  return (props.competitors ?? []).filter((competitor) => {
+    const compName = (competitor?.name ?? "")
+      .toString()
+      .trim()
+      .toLowerCase();
+    if (!compName) {
+      return false;
+    }
+    if (currentName && compName === currentName) {
+      return true;
+    }
+    return !usedSet.has(compName);
+  });
+});
+
+const isDuplicateName = (value) => {
+  const normalized = (value ?? "").toString().trim().toLowerCase();
+  if (!normalized) {
+    return false;
+  }
+  return normalizedUsedNames.value.has(normalized);
+};
+
 const updateName = (value) => {
+  if (isDuplicateName(value)) {
+    return;
+  }
   emit("update-name", { id: props.player.id, value });
 };
 
 const updateTeam = (value) => {
   emit("update-team", { id: props.player.id, value });
+};
+
+const handleCompetitorSelected = (competitor) => {
+  if (competitor && competitor.team) {
+    emit("update-team", { id: props.player.id, value: competitor.team });
+  }
 };
 
 const canSubtractPoints = computed(() => points.value > 0);
@@ -264,16 +316,20 @@ const negativeButtons = [-4, -3, -2];
     <div class="text-center">
       <div
         :class="[
-          'overflow-hidden rounded-lg border border-white/20 bg-white/5 dark:border-white/10',
+          'relative overflow-visible rounded-lg border border-white/20 bg-white/5 dark:border-white/10',
           nameCardPaddingClass,
         ]"
       >
-        <EditableText
+        <EditableAutocomplete
           :model-value="player.name"
           placeholder="Nombre del Competidor"
           :display-class="`${nameDisplayClass} focus:outline-none`"
           input-class="text-center text-4xl font-bold uppercase tracking-tight"
+          :options="availableCompetitors"
+          option-label-key="name"
+          option-description-key="team"
           @update:model-value="updateName"
+          @option-selected="handleCompetitorSelected"
         />
         <div :class="['my-2 border-t', dividerClass]" />
         <EditableText

@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, reactive, ref, watch } from "vue";
 import HeaderBar from "./components/Header.vue";
 import Countdown from "./components/Countdown.vue";
 import ScoreBoard from "./components/ScoreBoard.vue";
+import competitorsData from "./data/competitors.json";
 import { useCountdown } from "./composables/useCountdown";
 
 const organizer = ref("INTERCLUB MG TEAM BARCELONA");
@@ -29,6 +30,7 @@ const players = reactive([
     penalties: 0,
   },
 ]);
+const competitors = competitorsData ?? [];
 
 const { time, isRunning, start, pause, reset, addTime, subtractTime } =
   useCountdown(5 * 60);
@@ -243,6 +245,7 @@ watch(
           <ScoreBoard
             :players="players"
             :compact="isCompactHeight"
+            :competitors="competitors"
             @update-player="handlePlayerUpdate"
             @score-change="handleScoreChange"
           />
