@@ -15,6 +15,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  condensedStats: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const sectionGapClass = computed(() =>
@@ -42,6 +46,7 @@ const updatePlayer = ({ id, field, value }) => {
       :variant="index === 0 ? 'left' : 'right'"
       :compact="compact"
       :competitors="competitors"
+      :condensed-stats="condensedStats"
       :used-names="players
         .filter((_, innerIndex) => innerIndex !== index)
         .map((entry) => entry.name)

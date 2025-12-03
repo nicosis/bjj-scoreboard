@@ -11,6 +11,7 @@ const category = ref("Categoría: Edad / Faixa / Peso");
 const tatami = ref("Tatami X");
 const isDark = ref(true);
 const isCompactHeight = ref(false);
+const isMediumLandscape = ref(false);
 
 const players = reactive([
   {
@@ -144,6 +145,10 @@ const updateViewportFlags = () => {
     return;
   }
   isCompactHeight.value = window.innerHeight <= 820;
+  isMediumLandscape.value =
+    window.innerWidth >= 1180 &&
+    window.innerWidth <= 1500 &&
+    window.innerHeight <= 760;
 };
 
 const handleKeyPress = (event) => {
@@ -246,6 +251,7 @@ watch(
             :players="players"
             :compact="isCompactHeight"
             :competitors="competitors"
+            :condensed-stats="isMediumLandscape"
             @update-player="handlePlayerUpdate"
             @score-change="handleScoreChange"
           />

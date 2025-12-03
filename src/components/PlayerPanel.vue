@@ -25,6 +25,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  condensedStats: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update-name", "update-team", "score-change"]);
@@ -158,14 +162,19 @@ const pointsControlsJustifyClass = computed(() =>
 );
 
 const statsGridGapClass = computed(() =>
-  props.compact ? "gap-2" : "gap-3 sm:gap-4"
+  props.condensedStats ? "gap-1.5" : props.compact ? "gap-2" : "gap-3 sm:gap-4"
 );
 
 const statsGridFlexClass = computed(() =>
-  props.compact ? "flex-[0.3]" : ""
+  props.condensedStats ? "flex-[0.24]" : props.compact ? "flex-[0.3]" : ""
 );
 
-const statBoxPaddingClass = computed(() => (props.compact ? "p-2.5" : "p-3"));
+const statBoxPaddingClass = computed(() => {
+  if (props.condensedStats) {
+    return "p-2";
+  }
+  return props.compact ? "p-2.5" : "p-3";
+});
 
 const statLabelOffsetClass = computed(() => {
   const side = props.compact
@@ -194,15 +203,21 @@ const statButtonOffsetClass = computed(() => {
 });
 
 const statButtonGapClass = computed(() =>
-  props.compact ? "gap-1.5" : "gap-2"
+  props.condensedStats ? "gap-1" : props.compact ? "gap-1.5" : "gap-2"
 );
 
 const statButtonSizeClass = computed(() =>
-  props.compact ? "h-6 w-6 text-xs" : "h-7 w-7 text-sm"
+  props.condensedStats
+    ? "h-5 w-5 text-[0.65rem]"
+    : props.compact
+    ? "h-6 w-6 text-xs"
+    : "h-7 w-7 text-sm"
 );
 
 const statNumberClass = computed(() =>
-  props.compact
+  props.condensedStats
+    ? "text-[clamp(2rem,6vw,3.8rem)] sm:text-[clamp(2.4rem,5vw,4rem)]"
+    : props.compact
     ? "text-[clamp(2.4rem,8vw,4.2rem)] sm:text-[clamp(2.9rem,6vw,4.8rem)]"
     : "text-5xl sm:text-6xl"
 );

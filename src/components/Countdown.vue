@@ -42,7 +42,7 @@ const secondDirection = ref("down");
 const containerSpacingClass = computed(() =>
   props.compact ? "gap-3 py-2 sm:py-3" : "gap-4 py-4 sm:py-6"
 );
-console.log("compact:", props.compact);
+
 const timerScaleClass = computed(() =>
   props.compact
     ? "gap-4 text-[clamp(6rem,16vw,11rem)] sm:text-[clamp(5.5rem,13.5vw,9.8rem)]"
