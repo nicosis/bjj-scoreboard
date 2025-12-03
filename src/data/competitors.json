@@ -105,23 +105,23 @@
   },
   {
     "id": 14,
-    "name": "Milo Aizcorbe",
+    "name": "Marc Salazar",
     "belt": "BLANCO",
     "age": null,
-    "weight": 69,
+    "weight": 84,
     "team": "MG BARCELONA"
   },
   {
     "id": 15,
-    "name": "Jordi Baños",
+    "name": "Portillo",
     "belt": "BLANCO",
     "age": null,
-    "weight": 73,
+    "weight": 83,
     "team": "MG BARCELONA"
   },
   {
     "id": 16,
-    "name": "Agustín Martín Alcalá",
+    "name": "Carlos rueda",
     "belt": "BLANCO",
     "age": null,
     "weight": 80,
@@ -129,398 +129,454 @@
   },
   {
     "id": 17,
-    "name": "Arnau Falco Iglesias",
+    "name": "coral Alcaraz",
     "belt": "BLANCO",
     "age": null,
-    "weight": 61,
+    "weight": 65,
     "team": "MG BARCELONA"
   },
   {
     "id": 18,
-    "name": "Alex Carrasco",
+    "name": "Pablo Rodríguez",
     "belt": "BLANCO",
     "age": null,
-    "weight": 73,
+    "weight": 95,
     "team": "MG BARCELONA"
   },
   {
     "id": 19,
-    "name": "Jan Onuorah",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 84,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 20,
-    "name": "Domenech MArin",
+    "name": "Maite Méndez",
     "belt": "BLANCO",
     "age": null,
     "weight": 70,
     "team": "MG BARCELONA"
   },
   {
-    "id": 21,
-    "name": "Albert Monroy",
+    "id": 20,
+    "name": "Lucia Llorca",
     "belt": "BLANCO",
     "age": null,
-    "weight": 80,
+    "weight": 56,
+    "team": "MG BARCELONA"
+  },
+  {
+    "id": 21,
+    "name": "Eric Padilla",
+    "belt": "BLANCO",
+    "age": null,
+    "weight": 75,
     "team": "MG BARCELONA"
   },
   {
     "id": 22,
-    "name": "Marc Barrachina",
+    "name": "Marc Valldeneu",
     "belt": "BLANCO",
     "age": null,
-    "weight": 68,
+    "weight": 66,
     "team": "MG BARCELONA"
   },
   {
     "id": 23,
-    "name": "Marcos Mate",
+    "name": "Ivan Montilla Blanco",
     "belt": "BLANCO",
     "age": null,
-    "weight": 73,
+    "weight": 87,
     "team": "MG BARCELONA"
   },
   {
     "id": 24,
-    "name": "Fran García",
+    "name": "Dani Rodriguez",
     "belt": "BLANCO",
     "age": null,
-    "weight": 80,
+    "weight": 108,
     "team": "MG BARCELONA"
   },
   {
     "id": 25,
-    "name": "Alain Cadel Muñoz",
-    "belt": "BLANCO",
+    "name": "Gerard Hinojosa",
+    "belt": "AZUL",
     "age": null,
-    "weight": 65,
+    "weight": 86,
     "team": "MG BARCELONA"
   },
   {
     "id": 26,
-    "name": "Damià Franco",
-    "belt": "BLANCO",
+    "name": "Carlos Alberto",
+    "belt": "AZUL",
     "age": null,
-    "weight": 80,
+    "weight": 68,
     "team": "MG BARCELONA"
   },
   {
     "id": 27,
-    "name": "Albert Lagresa",
+    "name": "Martín robles",
     "belt": "AZUL",
     "age": null,
-    "weight": 80,
+    "weight": 113,
     "team": "MG BARCELONA"
   },
   {
     "id": 28,
-    "name": "toni  ortiz",
+    "name": "Cristina",
     "belt": "AZUL",
     "age": null,
-    "weight": 80,
+    "weight": 61,
     "team": "MG BARCELONA"
   },
   {
     "id": 29,
-    "name": "Ruben Castillo",
+    "name": "Carla melero",
     "belt": "AZUL",
     "age": null,
-    "weight": 73,
+    "weight": 57,
     "team": "MG BARCELONA"
   },
   {
     "id": 30,
-    "name": "Jorge Burgos",
+    "name": "Itiziar",
     "belt": "AZUL",
     "age": null,
-    "weight": 88,
+    "weight": 61,
     "team": "MG BARCELONA"
   },
   {
     "id": 31,
-    "name": "Ismael  I Cuevas cheikh",
+    "name": "Kaussu sabane",
     "belt": "AZUL",
     "age": null,
-    "weight": 73,
+    "weight": 92,
     "team": "MG BARCELONA"
   },
   {
     "id": 32,
-    "name": "Rafa Pérez",
+    "name": "Coral fernandez",
     "belt": "AZUL",
     "age": null,
-    "weight": 80,
+    "weight": 60,
     "team": "MG BARCELONA"
   },
   {
     "id": 33,
-    "name": "brandon benitez",
-    "belt": "AZUL",
+    "name": "Pablo torres",
+    "belt": "MORADO",
     "age": null,
-    "weight": 95,
+    "weight": 82,
     "team": "MG BARCELONA"
   },
   {
     "id": 34,
-    "name": "Raul osuna",
-    "belt": "AZUL",
-    "age": null,
-    "weight": 73,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 35,
-    "name": "Carlos Jimenez",
-    "belt": "AZUL",
-    "age": null,
-    "weight": 73,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 36,
-    "name": "Alex Méndez",
+    "name": "Manel Pages",
     "belt": "MORADO",
-    "age": null,
-    "weight": 88,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 37,
-    "name": "Marc onoro",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 80,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 38,
-    "name": "Xavi Ferrer",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 73,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 39,
-    "name": "gerad estrada",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 88,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 40,
-    "name": "angel bosch",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 73,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 41,
-    "name": "Françesc Garcia",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 68,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 42,
-    "name": "Eric Marín",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 73,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 43,
-    "name": "Bruno silva",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 80,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 44,
-    "name": "Neizan Menezes",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 65,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 45,
-    "name": "Albert  Escolà",
-    "belt": "MARRON",
-    "age": null,
-    "weight": 88,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 46,
-    "name": "Alexander Vera",
-    "belt": "MARRON",
-    "age": null,
-    "weight": 80,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 47,
-    "name": "marc  onoro",
-    "belt": "MARRON",
-    "age": null,
-    "weight": 80,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 48,
-    "name": "Carlos  Corral",
-    "belt": "MARRON",
-    "age": null,
-    "weight": 80,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 49,
-    "name": "Μàrius Rovira",
-    "belt": "MARRON",
-    "age": null,
-    "weight": 68,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 50,
-    "name": "Xavi  González",
-    "belt": "MARRON",
-    "age": null,
-    "weight": 80,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 51,
-    "name": "Helena Novoa",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 69,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 52,
-    "name": "judit cadiach",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 65,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 53,
-    "name": "Patri  guardiola",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 57,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 54,
-    "name": "nea",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 57,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 55,
-    "name": "Mireia palat",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 69,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 56,
-    "name": "Raquel costa",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 57,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 57,
-    "name": "Nuria  soler",
-    "belt": "BLANCO",
-    "age": null,
-    "weight": 65,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 58,
-    "name": "judit Cadiach",
-    "belt": "AZUL",
-    "age": null,
-    "weight": 65,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 59,
-    "name": "Raquel costa",
-    "belt": "AZUL",
-    "age": null,
-    "weight": 57,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 60,
-    "name": "Nuria soler",
-    "belt": "AZUL",
-    "age": null,
-    "weight": 65,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 61,
-    "name": "Raquel Costa",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 57,
-    "team": "MG BARCELONA"
-  },
-  {
-    "id": 62,
-    "name": "Mariam",
-    "belt": "BLANCO",
     "age": null,
     "weight": 62,
     "team": "MG BARCELONA"
   },
   {
-    "id": 63,
-    "name": "Jordi Pont",
-    "belt": "AZUL",
+    "id": 35,
+    "name": "Zack Zambrano",
+    "belt": "MORADO",
     "age": null,
-    "weight": 80,
+    "weight": 62,
     "team": "MG BARCELONA"
+  },
+  {
+    "id": 36,
+    "name": "Alain Cadel Muñoz",
+    "belt": "BLANCO",
+    "age": 22,
+    "weight": 97,
+    "team": "BRAVE"
+  },
+  {
+    "id": 37,
+    "name": "Jonathan Alvarado",
+    "belt": "BLANCO",
+    "age": 20,
+    "weight": 62,
+    "team": "BRAVE"
+  },
+  {
+    "id": 38,
+    "name": "David Fernandez Muñoz",
+    "belt": "BLANCO",
+    "age": 27,
+    "weight": 73,
+    "team": "BRAVE"
+  },
+  {
+    "id": 39,
+    "name": "Eric Trinidad Segovia",
+    "belt": "BLANCO",
+    "age": 29,
+    "weight": 74,
+    "team": "BRAVE"
+  },
+  {
+    "id": 40,
+    "name": "Biel Torrent garcia",
+    "belt": "BLANCO",
+    "age": 23,
+    "weight": 81,
+    "team": "BRAVE"
+  },
+  {
+    "id": 41,
+    "name": "Ian Belver Quimbayo",
+    "belt": "BLANCO",
+    "age": 19,
+    "weight": 86,
+    "team": "BRAVE"
+  },
+  {
+    "id": 42,
+    "name": "Joel Moreno",
+    "belt": "BLANCO",
+    "age": 20,
+    "weight": 95,
+    "team": "BRAVE"
+  },
+  {
+    "id": 43,
+    "name": "Roc Jabaloyes",
+    "belt": "BLANCO",
+    "age": 25,
+    "weight": 74,
+    "team": "BRAVE"
+  },
+  {
+    "id": 44,
+    "name": "Jerome Rodríguez",
+    "belt": "BLANCO",
+    "age": 26,
+    "weight": 77,
+    "team": "BRAVE"
+  },
+  {
+    "id": 45,
+    "name": "Joaquin Jaime",
+    "belt": "BLANCO",
+    "age": 19,
+    "weight": 66,
+    "team": "BRAVE"
+  },
+  {
+    "id": 46,
+    "name": "Juan Aperador",
+    "belt": "BLANCO",
+    "age": 25,
+    "weight": 72,
+    "team": "BRAVE"
+  },
+  {
+    "id": 47,
+    "name": "José Antonio Redel",
+    "belt": "BLANCO",
+    "age": 25,
+    "weight": 77,
+    "team": "BRAVE"
+  },
+  {
+    "id": 48,
+    "name": "Matias olivares",
+    "belt": "BLANCO",
+    "age": 34,
+    "weight": 97,
+    "team": "BRAVE"
+  },
+  {
+    "id": 49,
+    "name": "Francesc trull",
+    "belt": "BLANCO",
+    "age": 24,
+    "weight": 100,
+    "team": "BRAVE"
+  },
+  {
+    "id": 50,
+    "name": "Marc Jiménez",
+    "belt": "AZUL",
+    "age": 25,
+    "weight": 82,
+    "team": "BRAVE"
+  },
+  {
+    "id": 51,
+    "name": "Iván Villalonga",
+    "belt": "AZUL",
+    "age": 31,
+    "weight": 87,
+    "team": "BRAVE"
+  },
+  {
+    "id": 52,
+    "name": "Ángel Suárez",
+    "belt": "BLANCO",
+    "age": 19,
+    "weight": 83,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 53,
+    "name": "Alexander Vera",
+    "belt": "BLANCO",
+    "age": 26,
+    "weight": 86,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 54,
+    "name": "Alex Carrasco",
+    "belt": "BLANCO",
+    "age": 26,
+    "weight": 79,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 55,
+    "name": "Roman",
+    "belt": "BLANCO",
+    "age": 18,
+    "weight": 65,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 56,
+    "name": "Kilian Pons",
+    "belt": "BLANCO",
+    "age": 34,
+    "weight": 75,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 57,
+    "name": "Daniel Capellas",
+    "belt": "BLANCO",
+    "age": 20,
+    "weight": 85,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 58,
+    "name": "Arnau Falco Iglesias",
+    "belt": "AZUL",
+    "age": 21,
+    "weight": 72,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 59,
+    "name": "Albert Monroy",
+    "belt": "AZUL",
+    "age": 44,
+    "weight": 71,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 60,
+    "name": "Nadya",
+    "belt": "AZUL",
+    "age": 34,
+    "weight": 58,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 61,
+    "name": "Arley vargas",
+    "belt": "AZUL",
+    "age": 29,
+    "weight": 85,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 62,
+    "name": "Marc Ferriz",
+    "belt": "MARRON",
+    "age": 43,
+    "weight": 69,
+    "team": "ANIMAL"
+  },
+  {
+    "id": 63,
+    "name": "Kilian Lasala",
+    "belt": "BLANCO",
+    "age": 28,
+    "weight": 64,
+    "team": "MG GIRONA"
   },
   {
     "id": 64,
-    "name": "Marina Garcia Morales",
-    "belt": "AZUL",
-    "age": null,
-    "weight": 58,
-    "team": "MG BARCELONA"
+    "name": "Jaume Andújar",
+    "belt": "BLANCO",
+    "age": 20,
+    "weight": 66,
+    "team": "MG GIRONA"
   },
   {
     "id": 65,
-    "name": "Kira Pla",
-    "belt": "MORADO",
-    "age": null,
-    "weight": 55,
-    "team": "MG BARCELONA"
+    "name": "Bathie",
+    "belt": "BLANCO",
+    "age": 17,
+    "weight": 64,
+    "team": "MG GIRONA"
   },
   {
     "id": 66,
+    "name": "Marc Viader",
+    "belt": "BLANCO",
+    "age": 21,
+    "weight": 65,
+    "team": "MG GIRONA"
+  },
+  {
+    "id": 67,
+    "name": "Izan Morales",
+    "belt": "BLANCO",
+    "age": 26,
+    "weight": 68,
+    "team": "MG GIRONA"
+  },
+  {
+    "id": 68,
+    "name": "Albert Lagresa",
+    "belt": "BLANCO",
+    "age": 37,
+    "weight": 69,
+    "team": "MG GIRONA"
+  },
+  {
+    "id": 69,
+    "name": "Martí Salvador",
+    "belt": "BLANCO",
+    "age": 21,
+    "weight": 64,
+    "team": "MG GIRONA"
+  },
+  {
+    "id": 70,
+    "name": "Mariam",
+    "belt": "BLANCO",
+    "age": 27,
+    "weight": 62,
+    "team": "MG GIRONA"
+  },
+  {
+    "id": 71,
+    "name": "Jordi Pont",
+    "belt": "AZUL",
+    "age": 35,
+    "weight": 80,
+    "team": "MG GIRONA"
+  },
+  {
+    "id": 82,
+    "name": "Kira Pla",
+    "belt": "MORADO",
+    "age": 32,
+    "weight": 55,
+    "team": "MG GIRONA"
+  },
+  {
+    "id": 83,
     "name": "Imad MAROUAN CHAIBI",
     "belt": "BLANCO",
     "age": 27,
@@ -528,7 +584,7 @@
     "team": "MARENOSTRUM"
   },
   {
-    "id": 67,
+    "id": 84,
     "name": "Jennifer gallego sanchez",
     "belt": "BLANCO",
     "age": 35,
@@ -536,7 +592,7 @@
     "team": "MARENOSTRUM"
   },
   {
-    "id": 68,
+    "id": 85,
     "name": "Pablo gabarres jacinto",
     "belt": "BLANCO",
     "age": 21,
@@ -544,7 +600,7 @@
     "team": "MARENOSTRUM"
   },
   {
-    "id": 69,
+    "id": 86,
     "name": "Carlos Martínez Leuyerink",
     "belt": "BLANCO",
     "age": 27,
@@ -552,7 +608,7 @@
     "team": "MARENOSTRUM"
   },
   {
-    "id": 70,
+    "id": 87,
     "name": "Francisco Gabarres Gordillo",
     "belt": "BLANCO",
     "age": 27,
@@ -560,23 +616,23 @@
     "team": "MARENOSTRUM"
   },
   {
-    "id": 71,
+    "id": 88,
     "name": "Joan Amat Rosello Monne",
     "belt": "BLANCO",
     "age": 18,
     "weight": 65,
-    "team": "MARENOSTRUM"
+    "team": "PRETORIANS"
   },
   {
-    "id": 72,
+    "id": 89,
     "name": "Gabriel Nikolov Dimitrov",
     "belt": "BLANCO",
     "age": 32,
     "weight": 85,
-    "team": "MARENOSTRUM"
+    "team": "PRETORIANS"
   },
   {
-    "id": 73,
+    "id": 90,
     "name": "Derek Montero Cobos",
     "belt": "BLANCO",
     "age": 20,
@@ -584,7 +640,7 @@
     "team": "PRETORIANS"
   },
   {
-    "id": 74,
+    "id": 91,
     "name": "Meritxell soto cano",
     "belt": "BLANCO",
     "age": 26,
@@ -592,7 +648,7 @@
     "team": "PRETORIANS"
   },
   {
-    "id": 75,
+    "id": 93,
     "name": "Joan Gómez Guinart",
     "belt": "BLANCO",
     "age": 25,
@@ -600,7 +656,7 @@
     "team": "PRETORIANS"
   },
   {
-    "id": 76,
+    "id": 94,
     "name": "Emilia Amy Suarez",
     "belt": "BLANCO",
     "age": 24,
@@ -608,91 +664,43 @@
     "team": "PRETORIANS"
   },
   {
-    "id": 77,
-    "name": "Cristina Estébanez",
+    "id": 95,
+    "name": "Luis Guitart carrera",
     "belt": "BLANCO",
-    "age": 35,
-    "weight": 68,
+    "age": 39,
+    "weight": 90,
     "team": "PRETORIANS"
   },
   {
-    "id": 78,
-    "name": "Arley vargas",
+    "id": 96,
+    "name": "Xavi Andrés Baños",
     "belt": "BLANCO",
-    "age": 31,
-    "weight": 72,
+    "age": 30,
+    "weight": 75,
     "team": "PRETORIANS"
   },
   {
-    "id": 79,
-    "name": "Javier",
+    "id": 99,
+    "name": "Juan Dávila",
     "belt": "BLANCO",
-    "age": 28,
-    "weight": 88,
+    "age": 20,
+    "weight": 70,
     "team": "PRETORIANS"
   },
   {
-    "id": 80,
-    "name": "Jesus",
-    "belt": "BLANCO",
-    "age": 22,
-    "weight": 80,
+    "id": 100,
+    "name": "Agustín Martín Alcalá",
+    "belt": "AZUL",
+    "age": 25,
+    "weight": 70,
     "team": "PRETORIANS"
   },
   {
-    "id": 81,
-    "name": "Wail",
-    "belt": "BLANCO",
-    "age": 18,
-    "weight": 66,
-    "team": "PRETORIANS"
-  },
-  {
-    "id": 82,
-    "name": "Eric",
-    "belt": "BLANCO",
-    "age": 18,
-    "weight": 59,
-    "team": "PRETORIANS"
-  },
-  {
-    "id": 83,
-    "name": "Kilian Halter",
-    "belt": "BLANCO",
-    "age": 21,
-    "weight": 81,
-    "team": "PRETORIANS"
-  },
-  {
-    "id": 84,
-    "name": "Fran",
-    "belt": "BLANCO",
-    "age": 28,
-    "weight": 87,
-    "team": "PRETORIANS"
-  },
-  {
-    "id": 85,
-    "name": "Berto",
-    "belt": "BLANCO",
-    "age": 40,
-    "weight": 81,
-    "team": "PRETORIANS"
-  },
-  {
-    "id": 86,
-    "name": "Adria",
-    "belt": "BLANCO",
-    "age": 21,
-    "weight": 88,
-    "team": "PRETORIANS"
-  },
-  {
-    "id": 87,
-    "name": "Angel",
-    "belt": "BLANCO",
-    "age": 33,
-    "weight": 81,
+    "id": 101,
+    "name": "Haitam Boulahfa",
+    "belt": "AZUL",
+    "age": 27,
+    "weight": 95,
     "team": "PRETORIANS"
   }
 ]

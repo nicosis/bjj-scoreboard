@@ -1,6 +1,8 @@
 <script setup>
 import { computed } from "vue";
+import EditableAutocomplete from "./EditableAutocomplete.vue";
 import EditableText from "./EditableText.vue";
+import categories from "../data/categories.json";
 
 const props = defineProps({
   organizer: {
@@ -39,34 +41,51 @@ const updateTatami = (value) => emit("update:tatami", value);
 const headerPaddingClass = computed(() =>
   props.compact ? "px-3 py-2 sm:px-4" : "px-4 py-3 sm:px-6"
 );
-const leftGapClass = computed(() =>
-  props.compact ? "gap-3" : "gap-4"
-);
+const leftGapClass = computed(() => (props.compact ? "gap-3" : "gap-4"));
 const rightGapClass = computed(() =>
   props.compact ? "gap-4 sm:gap-6" : "gap-6 sm:gap-8"
 );
-const metaGapClass = computed(() =>
-  props.compact ? "gap-4" : "gap-6"
-);
+const metaGapClass = computed(() => (props.compact ? "gap-6" : "gap-8"));
 const logoSizeClass = computed(() =>
   props.compact ? "h-14 w-14 sm:h-16 sm:w-16" : "h-16 w-16 sm:h-20 sm:w-20"
 );
 const organizerDisplayClass = computed(() =>
   props.compact
-    ? "text-left text-base font-bold leading-tight tracking-tight hover:text-primary focus:outline-none"
-    : "text-left text-lg font-bold leading-tight tracking-tight hover:text-primary focus:outline-none"
+    ? "text-left text-2xl font-bold leading-tight tracking-tight hover:text-primary focus:outline-none"
+    : "text-left text-3xl font-bold leading-tight tracking-tight hover:text-primary focus:outline-none"
 );
 const organizerInputClass = computed(() =>
-  props.compact ? "text-base font-semibold" : "text-lg font-semibold"
+  props.compact ? "text-2xl font-semibold" : "text-3xl font-semibold"
 );
-const metaDisplayClass = computed(() =>
-  props.compact
-    ? "text-xs font-medium leading-tight text-gray-600 hover:text-primary dark:text-white/80"
-    : "text-sm font-medium leading-normal text-gray-600 hover:text-primary dark:text-white/80"
+const metaToneClass =
+  "font-medium text-gray-600 hover:text-primary dark:text-white/80";
+
+const metaDisplayClass = computed(() => {
+  const size = props.compact ? "text-2xl" : "text-3xl";
+  const leading = props.compact ? "leading-tight" : "leading-normal";
+  return `${size} ${leading} ${metaToneClass}`;
+});
+
+const categoryDisplayClass = computed(() => {
+  const size = props.compact ? "text-2xl" : "text-3xl";
+  const leading = props.compact ? "leading-tight" : "leading-normal";
+  return `${size} ${leading} ${metaToneClass}`;
+});
+
+const metaInputClass = computed(() => (props.compact ? "text-xl" : "text-2xl"));
+const categoryInputClass = computed(() =>
+  props.compact ? "text-2xl" : "text-3xl"
 );
-const metaInputClass = computed(() =>
-  props.compact ? "text-xs" : "text-sm"
+
+const categoryDropdownClass = computed(() =>
+  props.compact ? "text-xl" : "text-2xl"
 );
+
+const categoryOptionLabelClass = computed(() =>
+  props.compact ? "text-xl font-semibold" : "text-2xl font-semibold"
+);
+
+const categoryOptions = categories ?? [];
 </script>
 
 <template>
@@ -92,11 +111,15 @@ const metaInputClass = computed(() =>
     </div>
     <div :class="['flex flex-1 items-center justify-end', rightGapClass]">
       <div :class="['hidden items-center sm:flex', metaGapClass]">
-        <EditableText
+        <EditableAutocomplete
           :model-value="category"
           placeholder="Categoria"
-          :display-class="metaDisplayClass"
-          :input-class="metaInputClass"
+          :display-class="categoryDisplayClass"
+          :input-class="categoryInputClass"
+          :options="categoryOptions"
+          :min-chars="1"
+          :dropdown-class="categoryDropdownClass"
+          :option-label-class="categoryOptionLabelClass"
           @update:model-value="updateCategory"
         />
         <EditableText

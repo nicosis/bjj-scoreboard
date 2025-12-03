@@ -5,9 +5,10 @@ import Countdown from "./components/Countdown.vue";
 import ScoreBoard from "./components/ScoreBoard.vue";
 import competitorsData from "./data/competitors.json";
 import { useCountdown } from "./composables/useCountdown";
+console.log("Competitors Data:", competitorsData);
 
 const organizer = ref("INTERCLUB MG TEAM BARCELONA");
-const category = ref("Categoría: Edad / Faixa / Peso");
+const category = ref("Categoría: Genero / Peso / Faixa");
 const tatami = ref("Tatami X");
 const isDark = ref(true);
 const isCompactHeight = ref(false);

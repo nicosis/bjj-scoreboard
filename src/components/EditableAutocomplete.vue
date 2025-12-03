@@ -42,6 +42,19 @@ const props = defineProps({
     type: Number,
     default: 6,
   },
+  dropdownClass: {
+    type: String,
+    default: "text-sm",
+  },
+  optionLabelClass: {
+    type: String,
+    default: "text-base font-semibold",
+  },
+  optionDescriptionClass: {
+    type: String,
+    default:
+      "text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400",
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "option-selected"]);
@@ -212,7 +225,10 @@ const handleKeydown = (event) => {
       />
       <div
         v-if="hasSuggestions"
-        class="absolute left-0 right-0 z-30 mt-2 rounded-lg border border-gray-200 bg-white text-sm shadow-xl dark:border-white/10 dark:bg-gray-800"
+        :class="[
+          'absolute left-0 right-0 z-30 mt-2 rounded-lg border border-gray-200 bg-white shadow-xl dark:border-white/10 dark:bg-gray-800',
+          dropdownClass,
+        ]"
       >
         <button
           v-for="(option, index) in filteredOptions"
@@ -227,12 +243,12 @@ const handleKeydown = (event) => {
           @mousedown.prevent
           @click="selectOption(option)"
         >
-          <span class="text-base font-semibold">
+          <span :class="optionLabelClass">
             {{ getOptionLabel(option) }}
           </span>
           <span
             v-if="getOptionDescription(option)"
-            class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400"
+            :class="optionDescriptionClass"
           >
             {{ getOptionDescription(option) }}
           </span>
