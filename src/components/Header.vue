@@ -30,6 +30,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  editingLocked: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([
@@ -203,6 +207,7 @@ const categoryOptions = categories ?? [];
         placeholder="Nombre del evento"
         :display-class="organizerDisplayClass"
         :input-class="organizerInputClass"
+        :disabled="editingLocked"
         @update:model-value="updateOrganizer"
       />
     </div>
@@ -224,6 +229,7 @@ const categoryOptions = categories ?? [];
           :max-suggestions="categoryOptions.length"
           :dropdown-class="categoryDropdownClass"
           :option-label-class="categoryOptionLabelClass"
+          :disabled="editingLocked"
           @update:model-value="updateCategory"
         />
         <EditableText
@@ -231,6 +237,7 @@ const categoryOptions = categories ?? [];
           placeholder="Tatami"
           :display-class="metaDisplayClass"
           :input-class="metaInputClass"
+          :disabled="editingLocked"
           @update:model-value="updateTatami"
         />
       </div>

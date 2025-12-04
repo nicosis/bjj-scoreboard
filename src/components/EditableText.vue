@@ -22,6 +22,10 @@ const props = defineProps({
     type: String,
     default: "button",
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -39,6 +43,16 @@ watch(
   }
 );
 
+watch(
+  () => props.disabled,
+  (disabled) => {
+    if (disabled && isEditing.value) {
+      isEditing.value = false;
+      localValue.value = props.modelValue ?? "";
+    }
+  }
+);
+
 const isPlaceholderActive = computed(
   () => (props.modelValue ?? "").trim().length === 0
 );
@@ -48,6 +62,9 @@ const displayText = computed(() =>
 );
 
 const startEditing = () => {
+  if (props.disabled) {
+    return;
+  }
   isEditing.value = true;
   nextTick(() => {
     if (inputRef.value) {
@@ -79,8 +96,8 @@ const handleKeydown = (event) => {
     :is="tag"
     v-if="!isEditing"
     type="button"
-    class="cursor-text"
     :class="[
+      props.disabled ? 'cursor-not-allowed' : 'cursor-text',
       displayClass,
       isPlaceholderActive ? '!text-gray-400 dark:!text-gray-500' : '',
     ]"

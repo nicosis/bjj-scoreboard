@@ -55,6 +55,10 @@ const props = defineProps({
     default:
       "text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400",
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update:modelValue", "option-selected"]);
@@ -110,7 +114,21 @@ watch(filteredOptions, (options) => {
   }
 });
 
+watch(
+  () => props.disabled,
+  (disabled) => {
+    if (disabled && isEditing.value) {
+      isEditing.value = false;
+      highlightedIndex.value = -1;
+      localValue.value = props.modelValue ?? "";
+    }
+  }
+);
+
 const startEditing = () => {
+  if (props.disabled) {
+    return;
+  }
   isEditing.value = true;
   nextTick(() => {
     if (inputRef.value) {
@@ -202,8 +220,8 @@ const handleKeydown = (event) => {
       :is="tag"
       v-if="!isEditing"
       type="button"
-      class="cursor-text"
       :class="[
+        props.disabled ? 'cursor-not-allowed' : 'cursor-text',
         displayClass,
         isPlaceholderActive ? '!text-gray-400 dark:!text-gray-500' : '',
       ]"

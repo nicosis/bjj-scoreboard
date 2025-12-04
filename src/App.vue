@@ -7,16 +7,7 @@ import competitorsData from "./data/competitors.json";
 import { useCountdown } from "./composables/useCountdown";
 console.log("Competitors Data:", competitorsData);
 
-const organizer = ref("INTERCLUB 2025 - MG TEAM BARCELONA");
-const category = ref("Categoría");
-const tatami = ref("Tatami");
-const isDark = ref(true);
-const isCompactHeight = ref(false);
-const isMediumLandscape = ref(false);
-const isNarrowWidth = ref(false);
-const isLaptopViewport = ref(false);
-
-const players = reactive([
+const defaultPlayers = [
   {
     id: "left",
     name: "Competidor A",
@@ -33,7 +24,20 @@ const players = reactive([
     advantages: 0,
     penalties: 0,
   },
-]);
+];
+const defaultCategory = "Categoría";
+const organizer = ref("INTERCLUB 2025 - MG TEAM BARCELONA");
+const category = ref(defaultCategory);
+const tatami = ref("Tatami");
+const isDark = ref(true);
+const isCompactHeight = ref(false);
+const isMediumLandscape = ref(false);
+const isNarrowWidth = ref(false);
+const isLaptopViewport = ref(false);
+const isFullHdViewport = ref(false);
+const isResetConfirmVisible = ref(false);
+
+const players = reactive(defaultPlayers.map((player) => ({ ...player })));
 const competitors = competitorsData ?? [];
 
 const { time, isRunning, start, pause, reset, addTime, subtractTime } =
@@ -89,12 +93,37 @@ const resetAll = () => {
   // Resetea el temporizador
   reset();
 
-  // Resetea los marcadores de ambos jugadores
-  players.forEach((player) => {
-    player.points = 0;
-    player.advantages = 0;
-    player.penalties = 0;
+  // Resetea los marcadores y datos de ambos jugadores
+  players.forEach((player, index) => {
+    const template = defaultPlayers[index];
+    if (template) {
+      player.name = template.name;
+      player.team = template.team;
+      player.points = template.points;
+      player.advantages = template.advantages;
+      player.penalties = template.penalties;
+    } else {
+      player.points = 0;
+      player.advantages = 0;
+      player.penalties = 0;
+    }
   });
+
+  // Restablece la categoría inicial
+  category.value = defaultCategory;
+};
+
+const showResetConfirm = () => {
+  isResetConfirmVisible.value = true;
+};
+
+const hideResetConfirm = () => {
+  isResetConfirmVisible.value = false;
+};
+
+const confirmReset = () => {
+  resetAll();
+  hideResetConfirm();
 };
 
 const ensureAudioContext = () => {
@@ -155,6 +184,8 @@ const updateViewportFlags = () => {
   isNarrowWidth.value = window.innerWidth <= 1000;
   isLaptopViewport.value =
     window.innerWidth <= 1366 && window.innerHeight <= 768;
+  isFullHdViewport.value =
+    window.innerWidth >= 1900 && window.innerHeight >= 1000;
 };
 
 const handleKeyPress = (event) => {
@@ -188,7 +219,11 @@ const handleKeyPress = (event) => {
   // Tecla Escape: Reset completo
   if (event.code === "Escape" || event.key === "Escape") {
     event.preventDefault();
-    resetAll();
+    if (isResetConfirmVisible.value) {
+      hideResetConfirm();
+    } else {
+      showResetConfirm();
+    }
   }
 };
 
@@ -235,6 +270,7 @@ watch(
             :is-dark="isDark"
             :compact="isCompactHeight"
             :narrow="isNarrowWidth"
+            :editing-locked="isRunning"
             @update:organizer="setOrganizer"
             @update:category="setCategory"
             @update:tatami="setTatami"
@@ -247,7 +283,7 @@ watch(
             :compact="isCompactHeight"
             @play="start"
             @pause="pause"
-            @reset="resetAll"
+            @reset="showResetConfirm"
             @add-minute="() => addTime(60)"
             @subtract-minute="() => subtractTime(60)"
             @add-second="() => addTime(1)"
@@ -260,9 +296,42 @@ watch(
             :competitors="competitors"
             :condensed-stats="isMediumLandscape"
             :laptop="isLaptopViewport"
+            :full-hd="isFullHdViewport"
+            :editing-locked="isRunning"
             @update-player="handlePlayerUpdate"
             @score-change="handleScoreChange"
           />
+        </div>
+      </div>
+    </div>
+    <div
+      v-if="isResetConfirmVisible"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-6"
+      @click.self="hideResetConfirm"
+    >
+      <div
+        class="w-full max-w-md rounded-2xl bg-white p-6 text-gray-900 shadow-2xl dark:bg-gray-900 dark:text-white"
+      >
+        <p class="text-2xl font-bold leading-tight">¿Reiniciar marcador?</p>
+        <p class="mt-2 text-base text-gray-600 dark:text-gray-300">
+          Esta acción pondrá el tiempo y los puntajes en cero. ¿Seguro que
+          quieres continuar?
+        </p>
+        <div class="mt-6 flex gap-3">
+          <button
+            type="button"
+            class="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-base font-semibold text-gray-700 transition hover:bg-gray-100 dark:border-white/30 dark:text-white/90 dark:hover:bg-white/5"
+            @click="hideResetConfirm"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="flex-1 rounded-lg bg-red-600 px-4 py-3 text-base font-semibold text-white transition hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-500/40"
+            @click="confirmReset"
+          >
+            Sí, reiniciar
+          </button>
         </div>
       </div>
     </div>

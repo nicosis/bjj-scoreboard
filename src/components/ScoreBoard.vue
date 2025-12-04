@@ -23,6 +23,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  fullHd: {
+    type: Boolean,
+    default: false,
+  },
+  editingLocked: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const sectionGapClass = computed(() =>
@@ -52,6 +60,8 @@ const updatePlayer = ({ id, field, value }) => {
       :competitors="competitors"
       :condensed-stats="condensedStats"
       :laptop="laptop"
+      :full-hd="fullHd"
+      :editing-locked="editingLocked"
       :used-names="players
         .filter((_, innerIndex) => innerIndex !== index)
         .map((entry) => entry.name)

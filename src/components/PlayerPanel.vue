@@ -33,6 +33,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  fullHd: {
+    type: Boolean,
+    default: false,
+  },
+  editingLocked: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update-name", "update-team", "score-change"]);
@@ -247,6 +255,10 @@ const statNumberClass = computed(() =>
     : "text-5xl sm:text-6xl"
 );
 
+const statBoxScaleClass = computed(() =>
+  props.fullHd ? "origin-center scale-y-[0.8]" : ""
+);
+
 const emitScore = () => {
   emit("score-change", {
     id: props.player.id,
@@ -368,6 +380,7 @@ const negativeButtons = [-4, -3, -2];
           :options="availableCompetitors"
           option-label-key="name"
           option-description-key="team"
+          :disabled="editingLocked"
           @update:model-value="updateName"
           @option-selected="handleCompetitorSelected"
         />
@@ -377,6 +390,7 @@ const negativeButtons = [-4, -3, -2];
           placeholder="Nombre de la academia / Equipo"
           :display-class="`${teamDisplayClass} focus:outline-none`"
           input-class="text-center text-[0.7rem] uppercase tracking-wide"
+          :disabled="editingLocked"
           @update:model-value="updateTeam"
         />
       </div>
@@ -449,6 +463,7 @@ const negativeButtons = [-4, -3, -2];
           :class="[
             'bg-yellow-400 text-white rounded-lg flex items-center justify-center relative',
             statBoxPaddingClass,
+            statBoxScaleClass,
           ]"
         >
           <span
@@ -501,6 +516,7 @@ const negativeButtons = [-4, -3, -2];
           :class="[
             'bg-red-600 text-white rounded-lg flex items-center justify-center relative',
             statBoxPaddingClass,
+            statBoxScaleClass,
           ]"
         >
           <span
