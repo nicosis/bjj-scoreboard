@@ -13,6 +13,7 @@ const tatami = ref("Tatami X");
 const isDark = ref(true);
 const isCompactHeight = ref(false);
 const isMediumLandscape = ref(false);
+const isNarrowWidth = ref(false);
 
 const players = reactive([
   {
@@ -150,6 +151,7 @@ const updateViewportFlags = () => {
     window.innerWidth >= 1180 &&
     window.innerWidth <= 1500 &&
     window.innerHeight <= 760;
+  isNarrowWidth.value = window.innerWidth <= 1000;
 };
 
 const handleKeyPress = (event) => {
@@ -229,6 +231,7 @@ watch(
             :tatami="tatami"
             :is-dark="isDark"
             :compact="isCompactHeight"
+            :narrow="isNarrowWidth"
             @update:organizer="setOrganizer"
             @update:category="setCategory"
             @update:tatami="setTatami"

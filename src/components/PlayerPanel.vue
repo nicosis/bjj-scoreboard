@@ -117,9 +117,15 @@ const scoreStackGapClass = computed(() =>
   props.compact ? "gap-2" : "gap-2 sm:gap-3"
 );
 
-const pointsCardFlexClass = computed(() =>
-  props.compact ? "flex-[0.6]" : "flex-[0.9]"
-);
+const pointsCardFlexClass = computed(() => {
+  if (props.compact) {
+    return "flex-[0.6]";
+  }
+  if (props.condensedStats) {
+    return "flex-[2]";
+  }
+  return "flex-[0.9]";
+});
 
 const pointsCardPaddingClass = computed(() =>
   props.compact ? "p-1" : "p-1 sm:p-1.5"
@@ -165,9 +171,15 @@ const statsGridGapClass = computed(() =>
   props.condensedStats ? "gap-1.5" : props.compact ? "gap-2" : "gap-3 sm:gap-4"
 );
 
-const statsGridFlexClass = computed(() =>
-  props.condensedStats ? "flex-[0.24]" : props.compact ? "flex-[0.3]" : ""
-);
+const statsGridFlexClass = computed(() => {
+  if (props.compact) {
+    return "flex-[0.32]";
+  }
+  if (props.condensedStats) {
+    return "flex-[1]";
+  }
+  return "";
+});
 
 const statBoxPaddingClass = computed(() => {
   if (props.condensedStats) {
