@@ -3,6 +3,7 @@ import { computed } from "vue";
 import EditableAutocomplete from "./EditableAutocomplete.vue";
 import EditableText from "./EditableText.vue";
 import categories from "../data/categories.json";
+console.log("categories:", categories);
 
 const props = defineProps({
   organizer: {
@@ -83,7 +84,9 @@ const rightGapClass = computed(() => {
   return "gap-6 sm:gap-8";
 });
 const rightContainerClass = computed(() =>
-  props.narrow ? "flex w-full items-center justify-start" : "flex flex-1 items-center justify-end"
+  props.narrow
+    ? "flex w-full items-center justify-start"
+    : "flex flex-1 items-center justify-end"
 );
 const metaGapClass = computed(() => {
   if (props.compact) {
@@ -218,6 +221,7 @@ const categoryOptions = categories ?? [];
           :input-class="categoryInputClass"
           :options="categoryOptions"
           :min-chars="1"
+          :max-suggestions="categoryOptions.length"
           :dropdown-class="categoryDropdownClass"
           :option-label-class="categoryOptionLabelClass"
           @update:model-value="updateCategory"

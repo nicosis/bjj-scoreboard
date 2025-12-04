@@ -7,13 +7,14 @@ import competitorsData from "./data/competitors.json";
 import { useCountdown } from "./composables/useCountdown";
 console.log("Competitors Data:", competitorsData);
 
-const organizer = ref("INTERCLUB MG TEAM BARCELONA");
-const category = ref("Categoría: Genero / Peso / Faixa");
-const tatami = ref("Tatami X");
+const organizer = ref("INTERCLUB 2025 - MG TEAM BARCELONA");
+const category = ref("Categoría");
+const tatami = ref("Tatami");
 const isDark = ref(true);
 const isCompactHeight = ref(false);
 const isMediumLandscape = ref(false);
 const isNarrowWidth = ref(false);
+const isLaptopViewport = ref(false);
 
 const players = reactive([
   {
@@ -152,6 +153,8 @@ const updateViewportFlags = () => {
     window.innerWidth <= 1500 &&
     window.innerHeight <= 760;
   isNarrowWidth.value = window.innerWidth <= 1000;
+  isLaptopViewport.value =
+    window.innerWidth <= 1366 && window.innerHeight <= 768;
 };
 
 const handleKeyPress = (event) => {
@@ -256,6 +259,7 @@ watch(
             :compact="isCompactHeight"
             :competitors="competitors"
             :condensed-stats="isMediumLandscape"
+            :laptop="isLaptopViewport"
             @update-player="handlePlayerUpdate"
             @score-change="handleScoreChange"
           />

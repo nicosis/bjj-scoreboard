@@ -29,6 +29,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  laptop: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update-name", "update-team", "score-change"]);
@@ -183,9 +187,12 @@ const statsGridFlexClass = computed(() => {
 
 const statBoxPaddingClass = computed(() => {
   if (props.condensedStats) {
-    return "p-2";
+    return props.laptop ? "px-2 py-[0.4rem]" : "p-2";
   }
-  return props.compact ? "p-2.5" : "p-3";
+  if (props.compact) {
+    return props.laptop ? "px-2.5 py-[0.5rem]" : "p-2.5";
+  }
+  return props.laptop ? "px-3 py-[0.6rem]" : "p-3";
 });
 
 const statLabelOffsetClass = computed(() => {
@@ -228,9 +235,15 @@ const statButtonSizeClass = computed(() =>
 
 const statNumberClass = computed(() =>
   props.condensedStats
-    ? "text-[clamp(2rem,6vw,3.8rem)] sm:text-[clamp(2.4rem,5vw,4rem)]"
+    ? props.laptop
+      ? "text-[clamp(1.6rem,4.8vw,3rem)] sm:text-[clamp(1.9rem,4vw,3.2rem)]"
+      : "text-[clamp(2rem,6vw,3.8rem)] sm:text-[clamp(2.4rem,5vw,4rem)]"
     : props.compact
-    ? "text-[clamp(2.4rem,8vw,4.2rem)] sm:text-[clamp(2.9rem,6vw,4.8rem)]"
+    ? props.laptop
+      ? "text-[clamp(1.9rem,6.4vw,3.4rem)] sm:text-[clamp(2.3rem,4.8vw,3.8rem)]"
+      : "text-[clamp(2.4rem,8vw,4.2rem)] sm:text-[clamp(2.9rem,6vw,4.8rem)]"
+    : props.laptop
+    ? "text-[2.4rem] sm:text-[3rem]"
     : "text-5xl sm:text-6xl"
 );
 
