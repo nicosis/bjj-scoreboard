@@ -702,5 +702,13 @@
     "age": 27,
     "weight": 95,
     "team": "PRETORIANS"
+  },
+  {
+    "id": 102,
+    "name": "Josue",
+    "belt": "AZUL",
+    "age": null,
+    "weight": 68,
+    "team": "MG BARCELONA"
   }
 ]
