@@ -182,6 +182,7 @@ const selectOption = (option) => {
 const handleKeydown = (event) => {
   if (event.key === "ArrowDown") {
     event.preventDefault();
+    event.stopPropagation();
     if (filteredOptions.value.length === 0) {
       return;
     }
@@ -189,6 +190,7 @@ const handleKeydown = (event) => {
       (highlightedIndex.value + 1) % filteredOptions.value.length;
   } else if (event.key === "ArrowUp") {
     event.preventDefault();
+    event.stopPropagation();
     if (filteredOptions.value.length === 0) {
       return;
     }
@@ -197,6 +199,7 @@ const handleKeydown = (event) => {
       filteredOptions.value.length;
   } else if (event.key === "Enter") {
     event.preventDefault();
+    event.stopPropagation();
     if (
       highlightedIndex.value >= 0 &&
       highlightedIndex.value < filteredOptions.value.length
@@ -207,6 +210,7 @@ const handleKeydown = (event) => {
     }
   } else if (event.key === "Escape") {
     event.preventDefault();
+    event.stopPropagation();
     isEditing.value = false;
     localValue.value = props.modelValue ?? "";
     highlightedIndex.value = -1;

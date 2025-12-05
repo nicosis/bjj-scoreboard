@@ -40,6 +40,56 @@ const isResetConfirmVisible = ref(false);
 const players = reactive(defaultPlayers.map((player) => ({ ...player })));
 const competitors = competitorsData ?? [];
 
+const findPlayerById = (id) => players.find((entry) => entry.id === id);
+
+const adjustPlayerPoints = (id, delta) => {
+  const player = findPlayerById(id);
+  if (!player) {
+    return;
+  }
+  const current = typeof player.points === "number" ? player.points : 0;
+  player.points = Math.max(0, current + delta);
+};
+
+const adjustPlayerAdvantages = (id, delta) => {
+  const player = findPlayerById(id);
+  if (!player) {
+    return;
+  }
+  const current =
+    typeof player.advantages === "number" ? player.advantages : 0;
+  player.advantages = Math.min(99, Math.max(0, current + delta));
+};
+
+const adjustPlayerPenalties = (id, delta) => {
+  const player = findPlayerById(id);
+  if (!player) {
+    return;
+  }
+  const current =
+    typeof player.penalties === "number" ? player.penalties : 0;
+  player.penalties = Math.min(0, Math.max(-99, current + delta));
+};
+
+const pointsShortcutMap = {
+  Digit2: { id: "left", value: 2 },
+  Digit3: { id: "left", value: 3 },
+  Digit4: { id: "left", value: 4 },
+  Digit8: { id: "right", value: 2 },
+  Digit9: { id: "right", value: 3 },
+  Digit0: { id: "right", value: 4 },
+};
+
+const advantageShortcutMap = {
+  KeyQ: "left",
+  KeyO: "right",
+};
+
+const penaltyShortcutMap = {
+  KeyW: "left",
+  KeyP: "right",
+};
+
 const { time, isRunning, start, pause, reset, addTime, subtractTime } =
   useCountdown(5 * 60);
 const audioContext = ref(null);
@@ -188,8 +238,35 @@ const updateViewportFlags = () => {
     window.innerWidth >= 1900 && window.innerHeight >= 1000;
 };
 
+const handleScoreShortcuts = (event) => {
+  const pointsShortcut = pointsShortcutMap[event.code];
+  if (pointsShortcut) {
+    event.preventDefault();
+    const delta = event.shiftKey ? -pointsShortcut.value : pointsShortcut.value;
+    adjustPlayerPoints(pointsShortcut.id, delta);
+    return true;
+  }
+
+  const advantageTarget = advantageShortcutMap[event.code];
+  if (advantageTarget) {
+    event.preventDefault();
+    const delta = event.shiftKey ? -1 : 1;
+    adjustPlayerAdvantages(advantageTarget, delta);
+    return true;
+  }
+
+  const penaltyTarget = penaltyShortcutMap[event.code];
+  if (penaltyTarget) {
+    event.preventDefault();
+    const delta = event.shiftKey ? 1 : -1;
+    adjustPlayerPenalties(penaltyTarget, delta);
+    return true;
+  }
+
+  return false;
+};
+
 const handleKeyPress = (event) => {
-  // Verificar si el usuario está editando un campo (input o textarea con foco)
   const activeElement = document.activeElement;
   const isEditingField =
     activeElement &&
@@ -197,12 +274,14 @@ const handleKeyPress = (event) => {
       activeElement.tagName === "TEXTAREA" ||
       activeElement.isContentEditable);
 
-  // Si está editando, no ejecutar las acciones de teclado globales
   if (isEditingField) {
     return;
   }
 
-  // Barra espaciadora: Play/Pause
+  if (handleScoreShortcuts(event)) {
+    return;
+  }
+
   if (
     event.code === "Space" ||
     event.code === "Pause" ||
@@ -214,16 +293,25 @@ const handleKeyPress = (event) => {
     } else {
       start();
     }
+    return;
   }
 
-  // Tecla Escape: Reset completo
+  if (isResetConfirmVisible.value) {
+    if (event.code === "Escape" || event.key === "Escape") {
+      event.preventDefault();
+      hideResetConfirm();
+      return;
+    }
+    if (event.key === "Enter" || event.code === "Enter") {
+      event.preventDefault();
+      confirmReset();
+      return;
+    }
+  }
+
   if (event.code === "Escape" || event.key === "Escape") {
     event.preventDefault();
-    if (isResetConfirmVisible.value) {
-      hideResetConfirm();
-    } else {
-      showResetConfirm();
-    }
+    showResetConfirm();
   }
 };
 

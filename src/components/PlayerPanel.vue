@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, onBeforeUnmount, reactive, ref, watch } from "vue";
 import EditableAutocomplete from "./EditableAutocomplete.vue";
 import EditableText from "./EditableText.vue";
 import SlidingNumber from "./SlidingNumber.vue";
@@ -50,11 +50,53 @@ const advantages = ref(props.player.advantages ?? 0);
 const penalties = ref(props.player.penalties ?? 0);
 const penaltyDirection = ref("up");
 
+const feedbackState = reactive({
+  points: "",
+  advantage: "",
+  penalty: "",
+});
+
+const feedbackTimers = {
+  points: null,
+  advantage: null,
+  penalty: null,
+};
+
+const triggerFeedback = (type, key) => {
+  if (!type || !key) {
+    return;
+  }
+  feedbackState[type] = key;
+  if (feedbackTimers[type]) {
+    clearTimeout(feedbackTimers[type]);
+  }
+  feedbackTimers[type] = setTimeout(() => {
+    feedbackState[type] = "";
+    feedbackTimers[type] = null;
+  }, 180);
+};
+
+onBeforeUnmount(() => {
+  Object.keys(feedbackTimers).forEach((entry) => {
+    if (feedbackTimers[entry]) {
+      clearTimeout(feedbackTimers[entry]);
+      feedbackTimers[entry] = null;
+    }
+  });
+});
+
 watch(
   () => props.player.points,
   (value) => {
     if (typeof value === "number") {
-      points.value = Math.max(0, value);
+      const sanitized = Math.max(0, value);
+      const delta = sanitized - points.value;
+      points.value = sanitized;
+      if (delta > 0) {
+        triggerFeedback("points", `+${Math.abs(delta)}`);
+      } else if (delta < 0) {
+        triggerFeedback("points", `-${Math.abs(delta)}`);
+      }
     }
   }
 );
@@ -63,7 +105,14 @@ watch(
   () => props.player.advantages,
   (value) => {
     if (typeof value === "number") {
-      advantages.value = Math.max(0, value);
+      const sanitized = Math.min(99, Math.max(0, value));
+      const delta = sanitized - advantages.value;
+      advantages.value = sanitized;
+      if (delta > 0) {
+        triggerFeedback("advantage", "add");
+      } else if (delta < 0) {
+        triggerFeedback("advantage", "remove");
+      }
     }
   }
 );
@@ -72,7 +121,16 @@ watch(
   () => props.player.penalties,
   (value) => {
     if (typeof value === "number") {
-      penalties.value = Math.min(0, Math.max(-99, value));
+      const sanitized = Math.min(0, Math.max(-99, value));
+      const delta = sanitized - penalties.value;
+      penalties.value = sanitized;
+      if (delta < 0) {
+        penaltyDirection.value = "up";
+        triggerFeedback("penalty", "add");
+      } else if (delta > 0) {
+        penaltyDirection.value = "down";
+        triggerFeedback("penalty", "remove");
+      }
     }
   }
 );
@@ -259,6 +317,24 @@ const statBoxScaleClass = computed(() =>
   props.fullHd ? "origin-center scale-y-[0.8]" : ""
 );
 
+const buttonMotionClass = "transition-transform duration-150 ease-out";
+
+const getPointsFeedbackClass = (key) => {
+  if (feedbackState.points !== key) {
+    return "";
+  }
+  return isLeft.value
+    ? "scale-95 ring-2 ring-white/70 shadow-white/30"
+    : "scale-95 ring-2 ring-black/20 shadow-black/20";
+};
+
+const getStatFeedbackClass = (type, key) => {
+  if (feedbackState[type] !== key) {
+    return "";
+  }
+  return "scale-95 ring-2 ring-white/70 shadow-white/40";
+};
+
 const emitScore = () => {
   emit("score-change", {
     id: props.player.id,
@@ -270,33 +346,39 @@ const emitScore = () => {
 
 const addPoints = (value) => {
   points.value = Math.max(0, points.value + value);
+  triggerFeedback("points", `+${value}`);
   emitScore();
 };
 
 const subtractPoints = (value) => {
   points.value = Math.max(0, points.value - value);
+  triggerFeedback("points", `-${value}`);
   emitScore();
 };
 
 const addAdvantage = () => {
   advantages.value = Math.min(99, advantages.value + 1);
+  triggerFeedback("advantage", "add");
   emitScore();
 };
 
 const subtractAdvantage = () => {
   advantages.value = Math.max(0, advantages.value - 1);
+  triggerFeedback("advantage", "remove");
   emitScore();
 };
 
 const addPenalty = () => {
   penaltyDirection.value = "up";
   penalties.value = Math.max(-99, penalties.value - 1);
+  triggerFeedback("penalty", "add");
   emitScore();
 };
 
 const subtractPenalty = () => {
   penaltyDirection.value = "down";
   penalties.value = Math.min(0, penalties.value + 1);
+  triggerFeedback("penalty", "remove");
   emitScore();
 };
 
@@ -359,8 +441,8 @@ const penaltiesDisplay = computed(() => {
   return abs > 0 ? `-${abs}` : abs;
 });
 
-const positiveButtons = [4, 3, 2];
-const negativeButtons = [-4, -3, -2];
+const positiveButtons = [2, 3, 4];
+const negativeButtons = [-2, -3, -4];
 </script>
 
 <template>
@@ -427,6 +509,8 @@ const negativeButtons = [-4, -3, -2];
               'flex items-center justify-center rounded-lg font-bold',
               pointsButtonSizeClass,
               plusButtonClass,
+              buttonMotionClass,
+              getPointsFeedbackClass(`+${value}`),
             ]"
             @click="addPoints(value)"
           >
@@ -450,6 +534,8 @@ const negativeButtons = [-4, -3, -2];
               'flex items-center justify-center rounded-lg font-bold',
               pointsButtonSizeClass,
               minusButtonClass,
+              buttonMotionClass,
+              getPointsFeedbackClass(`${value}`),
             ]"
             @click="subtractPoints(Math.abs(value))"
           >
@@ -488,6 +574,8 @@ const negativeButtons = [-4, -3, -2];
               :class="[
                 'flex items-center justify-center rounded-md bg-white/20 text-white',
                 statButtonSizeClass,
+                buttonMotionClass,
+                getStatFeedbackClass('advantage', 'add'),
               ]"
               @click="addAdvantage"
             >
@@ -498,6 +586,8 @@ const negativeButtons = [-4, -3, -2];
               :class="[
                 'flex items-center justify-center rounded-md bg-black/20 text-white',
                 statButtonSizeClass,
+                buttonMotionClass,
+                getStatFeedbackClass('advantage', 'remove'),
               ]"
               @click="subtractAdvantage"
               v-show="canSubtractAdvantage"
@@ -541,6 +631,8 @@ const negativeButtons = [-4, -3, -2];
               :class="[
                 'flex items-center justify-center rounded-md bg-white/20 text-white',
                 statButtonSizeClass,
+                buttonMotionClass,
+                getStatFeedbackClass('penalty', 'add'),
               ]"
               @click="addPenalty"
             >
@@ -551,6 +643,8 @@ const negativeButtons = [-4, -3, -2];
               :class="[
                 'flex items-center justify-center rounded-md bg-black/20 text-white',
                 statButtonSizeClass,
+                buttonMotionClass,
+                getStatFeedbackClass('penalty', 'remove'),
               ]"
               @click="subtractPenalty"
               v-show="canIncreasePenalty"

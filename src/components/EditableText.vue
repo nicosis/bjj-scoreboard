@@ -82,9 +82,12 @@ const finishEditing = () => {
 const handleKeydown = (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
+    event.stopPropagation();
     finishEditing();
   }
   if (event.key === "Escape") {
+    event.preventDefault();
+    event.stopPropagation();
     isEditing.value = false;
     localValue.value = props.modelValue;
   }

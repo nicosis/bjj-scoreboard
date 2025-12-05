@@ -26,7 +26,36 @@ Sistema completo de scoreboard diseñado específicamente para torneos de BJJ qu
 #### ⌨️ Atajos de Teclado
 
 - **ESPACIO**: Play/Pause del temporizador
-- **ESCAPE**: Reset completo (tiempo y marcadores)
+- **ESCAPE**: Abrir/cerrar el popup de reinicio (fuera del modo edición)
+- **ENTER**: Confirmar reinicio cuando el popup está visible
+
+**Puntaje Competidor A (panel izquierdo):**
+
+- `2` → +2 puntos
+- `3` → +3 puntos
+- `4` → +4 puntos
+- `Shift + 2` → −2 puntos
+- `Shift + 3` → −3 puntos
+- `Shift + 4` → −4 puntos
+- `Q` → +1 ventaja
+- `Shift + Q` → −1 ventaja
+- `W` → +1 penalidad
+- `Shift + W` → −1 penalidad
+
+**Puntaje Competidor B (panel derecho):**
+
+- `8` → +2 puntos
+- `9` → +3 puntos
+- `0` → +4 puntos
+- `Shift + 8` → −2 puntos
+- `Shift + 9` → −3 puntos
+- `Shift + 0` → −4 puntos
+- `O` → +1 ventaja
+- `Shift + O` → −1 ventaja
+- `P` → +1 penalidad
+- `Shift + P` → −1 penalidad
+
+> Nota: Los atajos solo funcionan cuando no hay un campo editable activo (inputs/autocompletados).
 
 #### 🕐 Temporizador
 
